@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #ede7ed7a;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.btn-link {
+  text-decoration: none !important;
+}
+/* Input Number None*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.grid-hover:hover {
+  transition: 0.3s;
+  box-shadow: 2px 2px 25px 10px#888888;
+}
+.doughnut {
+  height: 50% !important;
+  width: 50% !important;
+}
+.active .activebtn {
+  text-decoration: none;
+  /* color: #fff; */
+  background-image: linear-gradient(to right, #e8f0ff25, #202c70);
+}
+.active:active,
+.sidebar-btn:hover {
+  background-image: linear-gradient(to right, #e8f0ff25, #202c70);
+  color: #fff;
+  font-weight: 800;
+}
+
+.logout:hover {
+  background-color: #f37d75;
+  color: #fff;
+  font-weight: 900;
+  transition: 0.8s;
+}
+.sidebar {
+  width: 20%;
+  min-width: 224px;
+  max-width: 260px;
+  transition: 0.5s;
+  transition-timing-function: ease;
+}
+
+.sidebar-sm {
+  max-width: 48px;
+  min-width: 48px;
+  transition: min-width 0.5s;
+  transition-timing-function: ease;
+  overflow: hidden;
+}
+
+/* Navbar */
+.nav-bar-content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: #32325d05 0 2px 5px -1px, #0000000d 0 1px 3px -1px;
+  font-size: 16px;
+}
+
+.nav-bar {
+  height: 68px;
+  .pending {
+    text-transform: uppercase !important;
+  }
+  .accepted {
+    text-transform: uppercase !important;
+  }
+  .rejected {
+    text-transform: uppercase !important;
+  }
+}
+.d-flex {
+  display: flex !important;
+}
+/* tbody {
+  display: block !important;
+  max-height: calc(100vh - 64px - 74px - 108px) !important;
+  overflow: auto !important;
+}
+thead,
+tbody tr {
+  display: table !important;
+  width: 100% !important;
+  table-layout: fixed !important;
+}
+thead {
+  width: 100% !important; 
+}
+table {
+  width: 100% !important;
+} */
