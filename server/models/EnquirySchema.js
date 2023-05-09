@@ -10,7 +10,7 @@ const Enquiry = new mongoose.Schema({
     assign: { type: String, required: true },
     employeename: { type: String, required: true },
     role: { type: String, default: 'enquiry' },
-    status: { type: String, }
+    status: { type: String, },
 },
     { timestamps: true }
 )

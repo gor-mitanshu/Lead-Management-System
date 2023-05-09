@@ -518,7 +518,7 @@ app.post('/api/addenquiry', async (req, res) => {
                 enquiry: req.body.enquiry,
                 assign: req.body.assign,
                 employeename: findemployee.firstname + " " + findemployee.lastname,
-                status: "pending",
+                status: "PENDING",
             })
             await enquiry.save()
             return res.status(200).json({
@@ -663,7 +663,7 @@ app.put("/api/acceptenquiry/:id", async (req, res) => {
             { _id: req.params.id },
             {
                 $set: {
-                    status: "accepted"
+                    status: "COMPLETED"
                 }
             },
             { new: true }
@@ -697,7 +697,7 @@ app.put("/api/rejectedenquiry/:id", async (req, res) => {
             { _id: req.params.id },
             {
                 $set: {
-                    status: "rejected"
+                    status: "REJECTED"
                 }
             },
             { new: true }

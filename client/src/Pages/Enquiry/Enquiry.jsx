@@ -319,7 +319,7 @@ const Enquiry = () => {
                           <>
                             <TableCell
                               align="center"
-                              sx={{ display: "flex" }}
+                              sx={{ display: "flex", justifyContent: "center" }}
                               className="d-flex"
                             >
                               <IconButton
@@ -352,11 +352,11 @@ const Enquiry = () => {
                           <TableCell
                             sx={{ textAlign: "center" }}
                             className={
-                              row.status === "pending"
+                              row.status === "PENDING"
                                 ? "pending"
-                                : row.status === "accepted"
+                                : row.status === "COMPLETED"
                                 ? "accepted"
-                                : row.status === "rejected"
+                                : row.status === "REJECTED"
                                 ? "rejected"
                                 : ""
                             }
@@ -364,11 +364,11 @@ const Enquiry = () => {
                             <Chip
                               label={row.status}
                               color={
-                                row.status === "pending"
+                                row.status === "PENDING"
                                   ? "warning"
-                                  : row.status === "accepted"
+                                  : row.status === "COMPLETED"
                                   ? "success"
-                                  : row.status === "rejected"
+                                  : row.status === "REJECTED"
                                   ? "error"
                                   : ""
                               }
