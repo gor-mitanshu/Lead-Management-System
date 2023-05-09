@@ -132,20 +132,22 @@ const Dashboard = () => {
     let currentYear = firstYear;
     let dateArray = [];
     let data = [];
-    while (currentYear <= lastYear) {
-      dateArray.push(`${currentYear.getMonth()}/${currentYear.getFullYear()}`);
+
+    let i = 0;
+    let currentDate = new Date();
+    for (i; i < 12; i++) {
+      dateArray.push(`${i + 1}/${currentDate.getFullYear()}`);
+      // eslint-disable-next-line no-loop-func
       let lastYearLeads = yearData.filter((e) => {
-        debugger;
         return (
-          new Date(e.createdAt).getMonth() === currentYear.getMonth() &&
-          new Date(e.createdAt).getFullYear() === currentYear.getFullYear()
+          new Date(e.createdAt).getMonth() === i &&
+          currentDate.getFullYear() === currentYear.getFullYear()
         );
       }).length;
-      console.log(lastYearLeads);
       data.push(lastYearLeads);
-      currentYear.setFullYear(currentYear.getFullYear() + 1);
     }
     console.log(dateArray);
+    debugger;
     return {
       labels: dateArray,
       datasets: [
