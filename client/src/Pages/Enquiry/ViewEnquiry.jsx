@@ -32,7 +32,6 @@ const ViewEnquiry = () => {
     await axios
       .get(`${process.env.REACT_APP_API}/getenquirydetails/${id}`)
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           setLoading(false);
           setViewenquiry(response.data.data);

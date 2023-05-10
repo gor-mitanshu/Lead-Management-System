@@ -26,9 +26,9 @@ var TotalLastYearleads = {
   labels: [],
   datasets: [
     {
-      label: "Total Last Month Leads",
+      label: "Total Last Year Leads",
       data: [],
-      backgroundColor: ["#202c70"],
+      backgroundColor: ["#202c70", "#e300fc", "#920002", "#fdcccc"],
       hoverOffset: 2,
       borderColor: "black",
       borderWidth: 2,
@@ -125,10 +125,7 @@ const Dashboard = () => {
   const getYearLeads = (yearData) => {
     var date = new Date();
     var firstYear = new Date(date.getFullYear(), date.getMonth(), 1);
-    console.log(firstYear);
-    var lastYear = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-    console.log(lastYear);
-
+    // var lastYear = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     let currentYear = firstYear;
     let dateArray = [];
     let data = [];
@@ -146,8 +143,6 @@ const Dashboard = () => {
       }).length;
       data.push(lastYearLeads);
     }
-    console.log(dateArray);
-    debugger;
     return {
       labels: dateArray,
       datasets: [
