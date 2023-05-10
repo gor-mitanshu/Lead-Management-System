@@ -131,6 +131,7 @@ const Enquiry = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              flexWrap: "wrap",
             }}
             lg={12}
             sm={11}

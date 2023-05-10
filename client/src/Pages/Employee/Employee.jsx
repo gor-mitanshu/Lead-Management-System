@@ -75,10 +75,12 @@ const Employee = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              flexWrap: "wrap",
             }}
             lg={12}
             sm={11}
-            xs={10}
+            md={8}
+            xs={8}
             marginBottom={0}
             marginRight={3}
             marginTop={2}
