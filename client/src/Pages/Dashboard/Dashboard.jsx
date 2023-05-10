@@ -309,7 +309,6 @@ const Dashboard = () => {
             >
               <Bar data={TotalLastMonthleads} />
             </Card>
-            <Typography>Monthly Enquires: </Typography>
           </Grid>
 
           <Grid item lg={6} xs={12}>
@@ -322,7 +321,6 @@ const Dashboard = () => {
             >
               <Bar data={TotalLastYearleads} />
             </Card>
-            <Typography>Yearly Enquires: </Typography>
           </Grid>
         </Grid>
       </Grid>
