@@ -137,7 +137,7 @@ const SideBar = () => {
                   <RateReview />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Enquiry List"
+                  primary="Leads List"
                   sx={{ whiteSpace: "nowrap" }}
                 />
               </ListItemButton>

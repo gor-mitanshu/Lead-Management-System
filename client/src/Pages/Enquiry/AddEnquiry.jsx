@@ -173,7 +173,7 @@ const AddEnquiry = () => {
                       fontWeight: "bolder",
                     }}
                   >
-                    Add Enquiry
+                    Add Lead
                   </Typography>
                 </Grid>
 
@@ -264,9 +264,9 @@ const AddEnquiry = () => {
                         fullWidth
                         variant="outlined"
                         name="enquiry"
-                        placeholder="Enquiry Details"
+                        placeholder="Lead Details"
                         // sx={{ margin: "20px 12px 0 0" }}
-                        label="Enquiry"
+                        label="Lead"
                         multiline
                         rows={4}
                         value={enquiry.enquiry}

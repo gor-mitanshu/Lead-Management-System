@@ -68,7 +68,7 @@ const Employee = () => {
           <Loader />
         </>
       ) : (
-        <Grid container>
+        <Grid container padding={3}>
           <Grid
             item
             sx={{
@@ -77,25 +77,28 @@ const Employee = () => {
               alignItems: "center",
               flexWrap: "wrap",
             }}
-            lg={12}
-            sm={11}
-            md={8}
-            xs={8}
-            marginBottom={0}
-            marginRight={3}
-            marginTop={2}
+            xs={12}
           >
-            <Typography paddingLeft={3} variant="h3" color="green">
+            <Typography
+              className="font"
+              color="green"
+              variant="h3"
+              paddingBottom={3}
+            >
               Employee Details
             </Typography>
-            <Link to="/addemployee" className="btn-link">
+            <Link
+              to="/addemployee"
+              className="btn-link"
+              style={{ marginBottom: "24px" }}
+            >
               <Button variant="contained" color="primary">
                 <PersonAddAlt sx={{ paddingRight: "5px" }} /> Add Employee
               </Button>
             </Link>
           </Grid>
 
-          <Grid item lg={12} sm={11} xs={10} margin={3}>
+          <Grid item lg={12} sm={12} xs={11}>
             {emp.length <= 0 ? (
               <div style={{ textAlign: "center", color: "red" }}>
                 <h1>* NO EMPLOYEE DATA FOUND ...</h1>
@@ -163,7 +166,9 @@ const Employee = () => {
                         <TableCell sx={{ textAlign: "center" }}>
                           {key + 1}
                         </TableCell>
-                        <TableCell sx={{ textAlign: "center" }}>
+                        <TableCell
+                          sx={{ textAlign: "center", display: "flex" }}
+                        >
                           {row.firstname} {row.lastname}
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
@@ -173,7 +178,7 @@ const Employee = () => {
                           {row.phone}
                         </TableCell>
 
-                        <TableCell align="center">
+                        <TableCell align="center" sx={{ display: "flex" }}>
                           <IconButton
                             aria-label="edit"
                             color="info"

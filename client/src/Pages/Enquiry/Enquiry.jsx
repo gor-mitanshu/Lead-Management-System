@@ -85,9 +85,9 @@ const Enquiry = () => {
       .then((response) => {
         if (response.status === 200) {
           getEnqData();
-          toast.success("Enquiry Delete Successfully");
+          toast.success("Lead Delete Successfully");
         } else {
-          toast.error("Error in Deleting Client Enquiry");
+          toast.error("Error in Deleting Client Lead");
         }
       });
   };
@@ -98,7 +98,7 @@ const Enquiry = () => {
       .then((response) => {
         if (response.status === 200) {
           getEmpEnquiry();
-          toast.success("Enquiry Status Accepted");
+          toast.success("Lead Status Accepted");
         } else {
           toast.error("Something went wrong");
         }
@@ -110,7 +110,7 @@ const Enquiry = () => {
       .then((response) => {
         if (response.status === 200) {
           getEmpEnquiry();
-          toast.error("Enquiry Status Rejected");
+          toast.error("Lead Status Rejected");
         } else {
           toast.error("Something went wrong");
         }
@@ -124,7 +124,7 @@ const Enquiry = () => {
           <Loader />
         </>
       ) : (
-        <Grid container>
+        <Grid container padding={3}>
           <Grid
             item
             sx={{
@@ -133,31 +133,35 @@ const Enquiry = () => {
               alignItems: "center",
               flexWrap: "wrap",
             }}
-            lg={12}
-            sm={11}
-            xs={10}
-            marginBottom={0}
-            marginRight={3}
-            marginTop={2}
+            xs={12}
           >
-            <Typography paddingLeft={3} variant="h3" color="green">
+            <Typography
+              className="font"
+              color="green"
+              variant="h3"
+              paddingBottom={3}
+            >
               Enquiry Details
             </Typography>
             {role === "admin" ? (
               <>
-                <Link to="/addenquiry" className="btn-link">
+                <Link
+                  to="/addenquiry"
+                  className="btn-link"
+                  style={{ marginBottom: "24px" }}
+                >
                   <Button variant="contained" color="primary">
-                    <PersonAddAlt sx={{ paddingRight: "5px" }} /> Add Enquiry
+                    <PersonAddAlt sx={{ paddingRight: "5px" }} /> Add Lead
                   </Button>
                 </Link>
               </>
             ) : null}
           </Grid>
 
-          <Grid item lg={12} sm={11} xs={10} margin={3}>
+          <Grid item lg={12} sm={12} xs={11}>
             {enq.length <= 0 ? (
               <div style={{ textAlign: "center", color: "red" }}>
-                <h1>* NO ENQUIRY DATA FOUND...</h1>
+                <h1>* NO Lead DATA FOUND...</h1>
               </div>
             ) : (
               <TableContainer
@@ -288,7 +292,7 @@ const Enquiry = () => {
 
                         {role === "admin" ? (
                           <>
-                            <TableCell align="center">
+                            <TableCell align="center" sx={{ display: "flex" }}>
                               <IconButton
                                 aria-label="edit"
                                 color="inherit"

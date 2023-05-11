@@ -108,7 +108,7 @@ const EditEnquiry = () => {
       return;
     }
     if (!updatenquiry.enquiry) {
-      toast.error("Please send us a Enquiry");
+      toast.error("Please send us a Lead");
       return;
     }
     if (!updatenquiry.assign) {
@@ -171,7 +171,7 @@ const EditEnquiry = () => {
                       fontWeight: "bolder",
                     }}
                   >
-                    Update Enquiry
+                    Update Lead
                   </Typography>
                 </Grid>
                 <form autoComplete="on">
@@ -257,9 +257,9 @@ const EditEnquiry = () => {
                         fullWidth
                         variant="outlined"
                         name="enquiry"
-                        placeholder="Enquiry Details"
+                        placeholder="Lead Details"
                         // sx={{ margin: "20px 12px 0 0" }}
-                        label="Enquiry"
+                        label="Lead"
                         multiline
                         rows={4}
                         value={updatenquiry.enquiry}

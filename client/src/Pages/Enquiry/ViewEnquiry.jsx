@@ -89,7 +89,7 @@ const ViewEnquiry = () => {
                       fontWeight: "bolder",
                     }}
                   >
-                    View Enquiry
+                    View Lead
                   </Typography>
                 </Grid>
 
@@ -161,8 +161,8 @@ const ViewEnquiry = () => {
                       fullWidth
                       variant="outlined"
                       name="enquiry"
-                      placeholder="Enquiry Details"
-                      label="Enquiry"
+                      placeholder="Lead Details"
+                      label="Lead"
                       multiline
                       rows={3}
                       value={viewenquiry.enquiry}

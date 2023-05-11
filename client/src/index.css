@@ -66,7 +66,19 @@ input::-webkit-inner-spin-button {
   transition-timing-function: ease;
   overflow: hidden;
 }
+@media (max-width: 600px) {
+  .sidebar {
+    max-width: 48px !important;
+    min-width: 48px !important;
+  }
 
+  .toggle-btn {
+    display: none !important;
+  }
+  .font {
+    font-size: 28px !important;
+  }
+}
 /* Navbar */
 .nav-bar-content {
   height: 100%;

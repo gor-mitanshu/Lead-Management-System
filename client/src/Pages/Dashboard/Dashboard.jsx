@@ -9,46 +9,49 @@ Chart.register(CategoryScale);
 Chart.register(...registerables);
 Chart.register(ArcElement);
 
-var TotalLastMonthleads = {
-  labels: [],
-  datasets: [
-    {
-      label: "Total Last Month Leads",
-      data: [],
-      backgroundColor: ["#202c70", "#e300fc", "#920002", "#fdcccc"],
-      hoverOffset: 2,
-      borderColor: "black",
-      borderWidth: 2,
-    },
-  ],
-};
-var TotalLastYearleads = {
-  labels: [],
-  datasets: [
-    {
-      label: "Total Last Year Leads",
-      data: [],
-      backgroundColor: ["#202c70", "#e300fc", "#920002", "#fdcccc"],
-      hoverOffset: 2,
-      borderColor: "black",
-      borderWidth: 2,
-    },
-  ],
-};
-
 const Dashboard = () => {
   const [id, setId] = useState();
   const [role, setRole] = useState();
   let [leads, setLeads] = useState([]);
   let [client, setClient] = useState([]);
+  var monthLeadChart = {
+    labels: [],
+    datasets: [
+      {
+        label: "Total Last Month Leads",
+        data: [],
+        backgroundColor: ["#202c70", "#f8c12b", "#dc3546", "#29a744"],
+        hoverOffset: 2,
+        // borderColor: "black",
+        // borderWidth: 2,
+      },
+    ],
+  };
+
+  var YearleadChart = {
+    labels: [],
+    datasets: [
+      {
+        label: "Total Last Year Leads",
+        data: [],
+        backgroundColor: ["#202c70", "#f8c12b", "#dc3546", "#29a744"],
+        hoverOffset: 2,
+        // borderColor: "black",
+        // borderWidth: 2,
+      },
+    ],
+  };
+
+  let [TotalLastMonthleads, setTotalLastMonthleads] = useState(monthLeadChart);
+  let [TotalLastYearleads, setTotalLastYearleads] = useState(YearleadChart);
 
   const getEmpEnquiry = async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/getempenq/${id}`)
       .then((response) => {
         setLeads(response.data.data);
-        TotalLastMonthleads = getLastMonthLeads(response.data.data);
-        TotalLastYearleads = getYearLeads(response.data.data);
+        setTotalLastMonthleads(getLastMonthLeads(response.data.data));
+        setTotalLastYearleads(getYearLeads(response.data.data));
       });
   };
 
@@ -57,8 +60,8 @@ const Dashboard = () => {
       .get(`${process.env.REACT_APP_API}/api/getenquiries`)
       .then((response) => {
         setLeads(response.data.data);
-        TotalLastMonthleads = getLastMonthLeads(response.data.data);
-        TotalLastYearleads = getYearLeads(response.data.data);
+        setTotalLastMonthleads(getLastMonthLeads(response.data.data));
+        setTotalLastYearleads(getYearLeads(response.data.data));
       });
   };
 
@@ -115,8 +118,8 @@ const Dashboard = () => {
           label: "Total Last Month Leads",
           data: data,
           hoverOffset: 2,
-          borderColor: "black",
-          borderWidth: 2,
+          // borderColor: "black",
+          // borderWidth: 2,
         },
       ],
     };
@@ -150,8 +153,8 @@ const Dashboard = () => {
           label: "Total Last Year Leads",
           data: data,
           hoverOffset: 2,
-          borderColor: "black",
-          borderWidth: 2,
+          // borderColor: "black",
+          // borderWidth: 2,
         },
       ],
     };

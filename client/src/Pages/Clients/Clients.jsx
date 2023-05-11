@@ -82,7 +82,7 @@ const Clients = () => {
           <Loader />
         </>
       ) : (
-        <Grid container>
+        <Grid container padding={3}>
           <Grid
             item
             sx={{
@@ -91,20 +91,24 @@ const Clients = () => {
               alignItems: "center",
               flexWrap: "wrap",
             }}
-            lg={12}
-            sm={11}
-            xs={10}
-            marginBottom={0}
-            marginRight={3}
-            marginTop={2}
+            xs={12}
           >
-            <Typography paddingLeft={3} variant="h3" color="green">
+            <Typography
+              className="font"
+              color="green"
+              variant="h3"
+              paddingBottom={3}
+            >
               Client Details
             </Typography>
 
             {role === "admin" ? (
               <>
-                <Link to="/addclient" className="btn-link">
+                <Link
+                  to="/addclient"
+                  className="btn-link"
+                  style={{ marginBottom: "24px" }}
+                >
                   <Button variant="contained" color="primary">
                     <PersonAddAlt sx={{ paddingRight: "5px" }} /> Add Client
                   </Button>
@@ -113,7 +117,7 @@ const Clients = () => {
             ) : null}
           </Grid>
 
-          <Grid item lg={12} sm={11} xs={10} margin={3}>
+          <Grid item lg={12} sm={12} xs={11}>
             {client.length <= 0 ? (
               <div style={{ textAlign: "center", color: "red" }}>
                 <h1>* NO CLIENT DATA FOUND...</h1>
@@ -210,7 +214,10 @@ const Clients = () => {
                             <TableCell sx={{ textAlign: "center" }}>
                               {row.employeename}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell
+                              align="center"
+                              sx={{ display: "flex", justifyContent: "center" }}
+                            >
                               <IconButton
                                 aria-label="edit"
                                 color="info"

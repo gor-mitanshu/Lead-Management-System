@@ -23,6 +23,7 @@ const NavBar = (props) => {
             <MenuIcon
               fontWeight="900"
               onClick={toggleSidebar}
+              className="toggle-btn"
               sx={{ cursor: "pointer", paddingRight: "16px", fontSize: "40px" }}
             />
             <Typography
