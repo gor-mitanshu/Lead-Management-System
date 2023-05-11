@@ -166,9 +166,7 @@ const Employee = () => {
                         <TableCell sx={{ textAlign: "center" }}>
                           {key + 1}
                         </TableCell>
-                        <TableCell
-                          sx={{ textAlign: "center", display: "flex" }}
-                        >
+                        <TableCell sx={{ textAlign: "center" }}>
                           {row.firstname} {row.lastname}
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
@@ -178,7 +176,10 @@ const Employee = () => {
                           {row.phone}
                         </TableCell>
 
-                        <TableCell align="center" sx={{ display: "flex" }}>
+                        <TableCell
+                          align="center"
+                          sx={{ display: "flex", justifyContent: "center" }}
+                        >
                           <IconButton
                             aria-label="edit"
                             color="info"

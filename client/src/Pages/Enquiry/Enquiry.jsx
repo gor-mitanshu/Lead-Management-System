@@ -292,7 +292,10 @@ const Enquiry = () => {
 
                         {role === "admin" ? (
                           <>
-                            <TableCell align="center" sx={{ display: "flex" }}>
+                            <TableCell
+                              align="center"
+                              sx={{ display: "flex", justifyContent: "center" }}
+                            >
                               <IconButton
                                 aria-label="edit"
                                 color="inherit"
