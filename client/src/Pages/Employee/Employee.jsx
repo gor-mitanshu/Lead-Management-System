@@ -55,9 +55,9 @@ const Employee = () => {
       .then((response) => {
         if (response.status === 200) {
           getEmpData();
-          toast.success("User delete successFully");
+          toast.success(response.data.message);
         } else {
-          toast.error("Error in Deleting User");
+          toast.error(response.data.message);
         }
       });
   };

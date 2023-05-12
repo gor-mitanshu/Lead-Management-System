@@ -69,9 +69,9 @@ const Clients = () => {
       .then((response) => {
         if (response.status === 200) {
           getData();
-          toast.success("Client Deleted Successfully");
+          toast.success(response.data.message);
         } else {
-          toast.error("Error in Deleting User");
+          toast.error(response.data.message);
         }
       });
   };

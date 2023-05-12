@@ -36,7 +36,7 @@ const EditClient = () => {
           return <h1>Data Not Found</h1>;
         }
         if (error?.response.status === 404) {
-          console.log("Some Error Occured");
+          console.log(error.response.data.message);
         }
       });
   };
@@ -78,7 +78,7 @@ const EditClient = () => {
         if (response.status === 200) {
           setUpdateClient(response.data.data);
         } else {
-          toast.error("Unable to Update User");
+          toast.error(response.data.message);
         }
       });
   };
@@ -120,10 +120,10 @@ const EditClient = () => {
       .put(`${process.env.REACT_APP_API}/api/updateclient/${id}`, body)
       .then((response) => {
         if (response) {
-          toast.success("Updated Data Successfully");
+          toast.success(response.data.message);
           navigate("/clients");
         } else {
-          toast.error("Error Updating");
+          toast.error(response.data.message);
         }
       });
   };

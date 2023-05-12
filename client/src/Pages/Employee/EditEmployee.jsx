@@ -56,7 +56,7 @@ const EditEmployee = () => {
           setLoading(false);
           setUpdatEmp(response.data.data);
         } else {
-          toast.error("Unable to Update User");
+          toast.error(response.data.message);
         }
       });
   };

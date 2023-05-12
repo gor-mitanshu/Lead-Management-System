@@ -29,7 +29,7 @@ app.post('/api/adminregister', async (req, res) => {
         if (!!existingadmin) {
             return res.status(409).send({
                 success: false,
-                error: "Already Registered!"
+                error: "Admin Already Registered!"
             })
         } else {
             const admin = new User({
@@ -87,7 +87,7 @@ app.post('/api/login', async (req, res) => {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Error in Login",
+            message: "Something went wrong",
             error
         })
     }
@@ -142,7 +142,7 @@ app.get("/api/profile", async (req, res) => {
         } else {
             return res.status(400).send({
                 success: false,
-                message: "Admin Not Found",
+                message: "No Data Found",
             })
         }
     } catch (error) {
@@ -163,9 +163,16 @@ app.put('/api/editprofile/:id', async (req, res) => {
             { $set: { firstname: req.body.firstname, lastname: req.body.lastname, email: req.body.email, phone: req.body.phone } }, { new: true }
         )
         if (!!result) {
-            return res.status(200).send({ success: true, message: "Updated Successfully", data: result })
+            return res.status(200).send({
+                success: true,
+                message: "Updated Successfully",
+                data: result
+            })
         } else {
-            return res.status(400).send({ success: false, message: "Error Updating" })
+            return res.status(400).send({
+                success: false,
+                message: "Error Updating"
+            })
         }
     } catch (error) {
         console.log(error)
@@ -185,7 +192,7 @@ app.post('/api/addclient', async (req, res) => {
         if (!!existingclient) {
             return res.status(409).send({
                 success: false,
-                error: "Already Added!"
+                error: "Client Already Added!"
             })
         } else {
             const findemployee = await User.findById({ _id: req.body.assign })
@@ -200,7 +207,7 @@ app.post('/api/addclient', async (req, res) => {
             await client.save()
             return res.status(200).send({
                 success: true,
-                message: "Added Successfully",
+                message: "Client Added Successfully",
                 client: client
             })
         }
@@ -208,7 +215,7 @@ app.post('/api/addclient', async (req, res) => {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Error in Adding",
+            message: "Something went wrong",
             error
         })
     }
@@ -234,7 +241,7 @@ app.get('/api/getclients', async (req, res) => {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -261,7 +268,7 @@ app.get('/api/geteditclient/:id', async (req, res) => {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -288,7 +295,7 @@ app.put('/api/updateclient/:id', async (req, res) => {
         if (!!updateclient) {
             return res.status(200).send({
                 success: true,
-                message: "Updated Successfully",
+                message: "Client Updated Successfully",
                 data: updateclient
             })
         } else {
@@ -301,7 +308,7 @@ app.put('/api/updateclient/:id', async (req, res) => {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -315,7 +322,7 @@ app.delete('/api/deleteclient/:id', async (req, res) => {
         if (!!deleteUser) {
             return res.status(200).send({
                 success: true,
-                message: "Deleted Successfully",
+                message: "Client Deleted Successfully",
             })
         } else {
             return res.status(400).send({
@@ -327,7 +334,7 @@ app.delete('/api/deleteclient/:id', async (req, res) => {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -343,7 +350,7 @@ app.post('/api/addemployees', async (req, res) => {
         if (!!existingemployee) {
             return res.status(409).send({
                 success: false,
-                error: "Already Added!"
+                error: "Employee Already Added!"
             })
         } else {
             const hashpassword = generatePassword.generate({
@@ -366,7 +373,7 @@ app.post('/api/addemployees', async (req, res) => {
             await employee.save()
             return res.status(200).send({
                 success: true,
-                message: "Successfully Added",
+                message: "Employee Added Successfully",
                 data: employee
             })
         }
@@ -374,7 +381,7 @@ app.post('/api/addemployees', async (req, res) => {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -414,19 +421,19 @@ app.delete('/api/deleteemployee/:id', async (req, res) => {
         if (!!deleteEmp) {
             return res.status(200).send({
                 success: true,
-                message: "Deleted Successfully",
+                message: "Employee Deleted Successfully",
             })
         } else {
             return res.status(404).send({
                 success: false,
-                message: "Error deleting employee"
+                message: "Error Deleting Employee"
             })
         }
     } catch (error) {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -478,20 +485,20 @@ app.put("/api/editemployee/:id", async (req, res) => {
         if (!!updateEmp) {
             res.status(200).send({
                 success: true,
-                message: "Employee Update Successfully",
+                message: "Employee Updated Successfully",
                 data: updateEmp
             })
         } else {
             res.status(400).send({
                 success: false,
-                message: "Error updating employee"
+                message: "Error Updating Employee"
             })
         }
     } catch (error) {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -523,7 +530,7 @@ app.post('/api/addenquiry', async (req, res) => {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -549,7 +556,7 @@ app.get('/api/getenquiries', async (req, res) => {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -571,7 +578,7 @@ app.get('/api/enquiry/:id', async (req, res) => {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -601,20 +608,20 @@ app.put("/api/updateenquiry/:id", async (req, res) => {
         if (!!updateEnquiry) {
             res.status(200).send({
                 success: true,
-                message: "Success",
+                message: "Lead Updated Successfully",
                 data: updateEnquiry
             })
         } else {
             res.status(404).send({
                 success: false,
-                message: "Error Fetching Data",
+                message: "Error Fetching Lead",
             })
         }
     } catch (error) {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -642,7 +649,7 @@ app.get('/getenquirydetails/:id', async (req, res) => {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -663,7 +670,7 @@ app.put("/api/acceptenquiry/:id", async (req, res) => {
         if (!!updateEnquiry) {
             res.status(200).send({
                 success: true,
-                message: "Success",
+                message: "Completed",
                 data: updateEnquiry
             })
         } else {
@@ -682,7 +689,7 @@ app.put("/api/acceptenquiry/:id", async (req, res) => {
     }
 })
 
-// accept status Enquiry
+// Reject status Enquiry
 app.put("/api/rejectedenquiry/:id", async (req, res) => {
     try {
         const updateEnquiry = await Enquiry.findByIdAndUpdate(
@@ -697,7 +704,7 @@ app.put("/api/rejectedenquiry/:id", async (req, res) => {
         if (!!updateEnquiry) {
             res.status(200).send({
                 success: true,
-                message: "Success",
+                message: "Rejected",
                 data: updateEnquiry
             })
         } else {
@@ -710,7 +717,7 @@ app.put("/api/rejectedenquiry/:id", async (req, res) => {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -724,7 +731,7 @@ app.delete('/api/deleteenquiry/:id', async (req, res) => {
         if (!!deleteEnquiry) {
             return res.status(200).send({
                 success: true,
-                message: "Deleted Successfully"
+                message: " Lead Deleted Successfully"
             })
         } else {
             res.status(400).send({
@@ -737,7 +744,7 @@ app.delete('/api/deleteenquiry/:id', async (req, res) => {
         console.log(error)
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -763,7 +770,7 @@ app.put('/api/changepassword/:id', async (req, res) => {
     } catch (error) {
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }
@@ -783,7 +790,7 @@ app.get('/getempclient/:id', async (req, res) => {
     } catch (error) {
         res.status(404).send({
             success: false,
-            message: "Some Error Occured",
+            message: "Something went wrong",
             error
         })
     }

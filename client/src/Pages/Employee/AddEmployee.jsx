@@ -66,13 +66,13 @@ const AddEmployee = () => {
       .post(`${process.env.REACT_APP_API}/api/addemployees`, body)
       .then((response) => {
         if (response?.status === 200) {
-          toast.success("Employee added successfully");
+          toast.success(response.data.message);
           navigate("/employees");
         }
       })
       .catch((error) => {
         if (error?.response.status === 404) {
-          toast.error("Some Error Occured");
+          toast.error(error.response.data.message);
         }
       });
   };

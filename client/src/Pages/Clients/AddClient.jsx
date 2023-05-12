@@ -36,7 +36,7 @@ const AddClient = () => {
           return <h1>Data Not Found</h1>;
         }
         if (error?.response.status === 404) {
-          console.log("Some Error Occured");
+          console.log(error.response.data.message);
         }
       });
   };
@@ -101,13 +101,13 @@ const AddClient = () => {
       .post(`${process.env.REACT_APP_API}/api/addclient`, body)
       .then((response) => {
         if (response?.status === 200) {
-          toast.success("Client added successfully");
+          toast.success(response.data.message);
           navigate("/clients");
         }
       })
       .catch((error) => {
         if (error?.response.status === 404) {
-          toast.error("Some Error Occured");
+          toast.error(error.response.data.message);
         }
       });
   };

@@ -58,10 +58,10 @@ const ChangePassword = () => {
         .put(`${process.env.REACT_APP_API}/api/changepassword/${id.id}`, body)
         .then((response) => {
           if (response.status === 200) {
-            toast.success("Password Changed Successfully");
+            toast.success(response.data.message);
             navigate("/");
           } else {
-            toast.error("Error Changing Password");
+            toast.error(response.data.message);
           }
         });
     }

@@ -51,7 +51,7 @@ const EditProfile = () => {
           setEdit(response.data.data);
         })
         .catch((error) => {
-          console.log(error);
+          toast.error(error.response.data.message);
         });
     }
   };
@@ -106,10 +106,10 @@ const EditProfile = () => {
       .put(`${process.env.REACT_APP_API}/api/editprofile/${id}`, body)
       .then((response) => {
         if (response) {
-          toast.success("Updated Data Successfully");
+          toast.success(response.data.message);
           navigate("/profile");
         } else if (response.status === 404) {
-          toast.error("Error Updating");
+          toast.error(response.data.message);
         }
       });
   };

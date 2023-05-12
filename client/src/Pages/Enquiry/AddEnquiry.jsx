@@ -36,7 +36,7 @@ const AddEnquiry = () => {
           return <h1>Data Not Found</h1>;
         }
         if (error?.response.status === 404) {
-          console.log("Some Error Occured");
+          console.log(error.response.data.message);
         }
       });
   };
@@ -108,13 +108,13 @@ const AddEnquiry = () => {
       .post(`${process.env.REACT_APP_API}/api/addenquiry`, body)
       .then((response) => {
         if (response.status === 200) {
-          toast.success("Thank for your request");
+          toast.success(response.data.message);
           navigate("/enquiry");
         }
       })
       .catch((error) => {
         if (error.response.status === 404) {
-          toast.error("Error: " + error.message);
+          toast.error(error.response.data.message);
         }
       });
   };

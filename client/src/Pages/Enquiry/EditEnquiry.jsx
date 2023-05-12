@@ -36,7 +36,7 @@ const EditEnquiry = () => {
           return <h1>Data Not Found</h1>;
         }
         if (error?.response.status === 404) {
-          console.log("Some Error Occured");
+          console.log(error.response.data.message);
         }
       });
   };
@@ -81,7 +81,7 @@ const EditEnquiry = () => {
         if (response.status === 200) {
           setUpdatenquiry(response.data.data);
         } else {
-          toast.error("Unable to Update User");
+          toast.error(response.data.message);
         }
       });
   };
@@ -130,10 +130,10 @@ const EditEnquiry = () => {
       .put(`${process.env.REACT_APP_API}/api/updateenquiry/${id}`, body)
       .then((response) => {
         if (response) {
-          toast.success("Updated Data Successfully");
+          toast.success(response.data.message);
           navigate("/enquiry");
         } else {
-          toast.error("Error Updating");
+          toast.error(response.data.message);
         }
       });
   };

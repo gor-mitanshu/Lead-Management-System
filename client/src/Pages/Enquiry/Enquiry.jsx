@@ -57,7 +57,7 @@ const Enquiry = () => {
           return <h1>Data Not Found</h1>;
         }
         if (error?.response.status === 404) {
-          console.log("Some Error Occured");
+          console.log(error.response.data.message);
         }
       });
   };
@@ -85,9 +85,9 @@ const Enquiry = () => {
       .then((response) => {
         if (response.status === 200) {
           getEnqData();
-          toast.success("Lead Delete Successfully");
+          toast.success(response.data.message);
         } else {
-          toast.error("Error in Deleting Client Lead");
+          toast.error(response.data.message);
         }
       });
   };
