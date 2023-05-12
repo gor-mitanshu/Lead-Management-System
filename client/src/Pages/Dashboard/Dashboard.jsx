@@ -301,7 +301,7 @@ const Dashboard = () => {
           </Grid>
         </Grid>
 
-        <Grid item lg={12} container spacing={2}>
+        <Grid item container spacing={2}>
           <Grid item lg={6} xs={12}>
             <Card
               sx={{
@@ -310,7 +310,10 @@ const Dashboard = () => {
                 alignItems: "center",
               }}
             >
-              <Bar data={TotalLastMonthleads} />
+              <Bar
+                style={{ height: "50vh !important" }}
+                data={TotalLastMonthleads}
+              />
             </Card>
           </Grid>
 
