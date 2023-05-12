@@ -43,9 +43,6 @@ const Clients = () => {
       setClient(response.data.data);
     }
   };
-  // useEffect(() => {
-
-  // }, []);
   useEffect(() => {
     setLoading(true);
     const token = JSON.parse(localStorage.getItem("auth")).result.token;

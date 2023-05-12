@@ -73,7 +73,6 @@ const AddEnquiry = () => {
 
   const HandleAddEnquiry = async (e) => {
     e.preventDefault();
-    // perfrom validation using switch cases and passing toaster for error and success messages
     if (!regfirstname.test(enquiry.firstname)) {
       toast.error("Please Enter the Valid Firstname");
       return;

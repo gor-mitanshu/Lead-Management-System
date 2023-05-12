@@ -154,9 +154,7 @@ const EditProfile = () => {
                           label="Firstname"
                           placeholder="Enter Your Firstname"
                           fullWidth
-                          // sx={{ margin: "20px 12px 0 0" }}
                           value={edit.firstname}
-                          // defaultValue="Mitanshu"
                           onChange={handleEdit}
                           name="firstname"
                         />
@@ -166,8 +164,6 @@ const EditProfile = () => {
                           label="Lastname"
                           placeholder="Enter Your Lastname"
                           fullWidth
-                          // sx={{ margin: "20px 12px 0 0" }}
-                          // defaultValue="Gor"
                           value={edit.lastname}
                           onChange={handleEdit}
                           name="lastname"
@@ -178,8 +174,6 @@ const EditProfile = () => {
                           label="Email"
                           placeholder="Enter Your Email"
                           fullWidth
-                          // sx={{ margin: "25px 12px 0 0 " }}
-                          // defaultValue="gor.mitanshu3@gmail.com"
                           value={edit.email}
                           onChange={handleEdit}
                           name="email"
@@ -191,8 +185,6 @@ const EditProfile = () => {
                           placeholder="Enter Your Number"
                           type="number"
                           fullWidth
-                          // sx={{ margin: "25px 12px 0 0 " }}
-                          // defaultValue="9558993690"
                           value={edit.phone}
                           onChange={handleEdit}
                           name="phone"
