@@ -71,9 +71,9 @@ const ChangePassword = () => {
     <>
       <Grid
         container
+        padding={3}
         align="center"
         sx={{
-          marginTop: "30px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -99,7 +99,6 @@ const ChangePassword = () => {
           >
             <Grid
               item
-              lg={12}
               xs={12}
               sx={{
                 display: "flex",
@@ -107,17 +106,15 @@ const ChangePassword = () => {
                 justifyContent: "center",
               }}
             >
-              <Avatar sx={{ background: "green", marginRight: "5px" }}>
+              <Avatar sx={{ background: "#202c70", marginRight: "5px" }}>
                 <ChangeCircle />
               </Avatar>
               <Typography
+                className="font"
                 variant="h5"
-                component="h1"
+                color="#202c70"
+                fontWeight={"bolder"}
                 align="center"
-                sx={{
-                  padding: "10px 0",
-                  fontWeight: "bolder",
-                }}
               >
                 Change Password
               </Typography>

@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../Loader";
+import "../../index.css";
 
 const EditEmployee = () => {
   const navigate = useNavigate();
@@ -115,32 +116,28 @@ const EditEmployee = () => {
         </>
       ) : (
         <>
-          <Grid container>
+          <Grid container padding={3}>
             <Grid align="center" item lg={4} xs={12} sm={8} md={10} mx="auto">
-              <Paper
-                elevation={24}
-                sx={{ margin: "30px auto", padding: "38px 20px" }}
-              >
+              <Paper elevation={24} sx={{ padding: "30px" }}>
                 <Grid
+                  marginBottom={4}
                   item
                   sx={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    marginBottom: "10px",
                   }}
                 >
-                  <Avatar sx={{ background: "green", marginRight: "10px" }}>
+                  <Avatar sx={{ background: "#202c70", marginRight: "10px" }}>
                     <Edit />
                   </Avatar>
                   <Typography
+                    className="font"
+                    color="#202c70"
                     variant="h4"
-                    component="h1"
                     align="center"
-                    sx={{
-                      padding: "10px 0",
-                      fontWeight: "bolder",
-                    }}
+                    fontWeight={"bolder"}
+                    sx={{ display: "flex", flexWrap: "wrap" }}
                   >
                     Update Employee
                   </Typography>
@@ -223,7 +220,7 @@ const EditEmployee = () => {
                   </Grid>
                   <ButtonGroup
                     sx={{
-                      margin: "25px 0 0 0",
+                      margin: "24px 0 0 0",
                     }}
                   >
                     <Link to="/employees" className="btn-link">

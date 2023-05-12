@@ -178,8 +178,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <Grid container>
-        <Grid item container spacing={1} sx={{ padding: "25px 10px" }}>
+      <Grid container padding={2}>
+        <Grid item container spacing={1} paddingBottom={3}>
           <Grid item lg={2.4} md={6} sm={12} xs={12}>
             <Card
               sx={{
@@ -301,7 +301,7 @@ const Dashboard = () => {
           </Grid>
         </Grid>
 
-        <Grid item lg={12} container spacing={2} sx={{ padding: "20px 10px" }}>
+        <Grid item lg={12} container spacing={2}>
           <Grid item lg={6} xs={12}>
             <Card
               sx={{

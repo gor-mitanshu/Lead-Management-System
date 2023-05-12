@@ -501,32 +501,24 @@ app.put("/api/editemployee/:id", async (req, res) => {
 // Add Enquiry
 app.post('/api/addenquiry', async (req, res) => {
     try {
-        let existingenquiry = await Enquiry.findOne({ email: req.body.email });
-        if (!!existingenquiry) {
-            return res.status(409).send({
-                success: false,
-                error: "Already Added!"
-            })
-        } else {
-            const findemployee = await User.findById({ _id: req.body.assign })
-            const enquiry = new Enquiry({
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                email: req.body.email,
-                phone: req.body.phone,
-                company: req.body.company,
-                enquiry: req.body.enquiry,
-                assign: req.body.assign,
-                employeename: findemployee.firstname + " " + findemployee.lastname,
-                status: "PENDING",
-            })
-            await enquiry.save()
-            return res.status(200).json({
-                success: true,
-                message: "Enquiry Added Successfully",
-                data: enquiry
-            })
-        }
+        const findemployee = await User.findById({ _id: req.body.assign })
+        const enquiry = new Enquiry({
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            phone: req.body.phone,
+            company: req.body.company,
+            enquiry: req.body.enquiry,
+            assign: req.body.assign,
+            employeename: findemployee.firstname + " " + findemployee.lastname,
+            status: "PENDING",
+        })
+        await enquiry.save()
+        return res.status(200).json({
+            success: true,
+            message: "Enquiry Added Successfully",
+            data: enquiry
+        })
     } catch (error) {
         console.log(error)
         res.status(404).send({

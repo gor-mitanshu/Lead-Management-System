@@ -11,6 +11,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loader from "../Loader";
+import "../../index.css";
 
 const ViewEnquiry = () => {
   const [viewenquiry, setViewenquiry] = useState({
@@ -62,32 +63,27 @@ const ViewEnquiry = () => {
         </>
       ) : (
         <>
-          <Grid container>
+          <Grid container padding={3}>
             <Grid align="center" item lg={4} xs={12} sm={8} md={10} mx="auto">
-              <Paper
-                elevation={24}
-                sx={{ margin: "30px auto", padding: "38px 20px" }}
-              >
+              <Paper elevation={24} sx={{ padding: "30px" }}>
                 <Grid
+                  paddingBottom={3}
                   item
                   sx={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    marginBottom: "10px",
                   }}
                 >
-                  <Avatar sx={{ marginRight: "10px" }}>
-                    <Visibility color="inherit" />
+                  <Avatar sx={{ marginRight: "10px", background: "#202c70" }}>
+                    <Visibility />
                   </Avatar>
                   <Typography
+                    className="font"
+                    color={"#202c70"}
                     variant="h4"
-                    component="h1"
                     align="center"
-                    sx={{
-                      padding: "10px 0",
-                      fontWeight: "bolder",
-                    }}
+                    fontWeight="bolder"
                   >
                     View Lead
                   </Typography>

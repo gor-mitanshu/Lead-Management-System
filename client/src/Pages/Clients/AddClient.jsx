@@ -17,6 +17,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../Loader";
+import "../../index.css";
 
 const AddClient = () => {
   const [isloading, setLoading] = useState(false);
@@ -118,32 +119,27 @@ const AddClient = () => {
         </>
       ) : (
         <>
-          <Grid container>
+          <Grid container padding={3}>
             <Grid align="center" item lg={4} xs={12} sm={8} md={10} mx="auto">
-              <Paper
-                elevation={24}
-                sx={{ margin: "30px auto", padding: "38px 20px" }}
-              >
+              <Paper elevation={24} sx={{ padding: "20px " }}>
                 <Grid
                   item
+                  paddingBottom={3}
                   sx={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    marginBottom: "10px",
                   }}
                 >
-                  <Avatar sx={{ background: "green", marginRight: "10px" }}>
+                  <Avatar sx={{ background: "#202c70", marginRight: "10px" }}>
                     <PersonAdd />
                   </Avatar>
                   <Typography
+                    className="font"
+                    color="#202c70"
                     variant="h4"
-                    component="h1"
+                    fontWeight="bolder"
                     align="center"
-                    sx={{
-                      padding: "10px 0",
-                      fontWeight: "bolder",
-                    }}
                   >
                     Add Client
                   </Typography>

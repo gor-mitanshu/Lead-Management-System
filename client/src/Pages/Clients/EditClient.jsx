@@ -17,6 +17,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../Loader";
+import "../../index.css";
 
 const EditClient = () => {
   const [emp, setEmp] = useState([]);
@@ -134,14 +135,12 @@ const EditClient = () => {
         </>
       ) : (
         <>
-          <Grid container>
+          <Grid container padding={3}>
             <Grid align="center" item lg={4} xs={12} sm={8} md={10} mx="auto">
-              <Paper
-                elevation={24}
-                sx={{ margin: "30px auto", padding: "38px 20px" }}
-              >
+              <Paper elevation={24} sx={{ padding: "30px" }}>
                 <Grid
                   item
+                  paddingBottom={3}
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -149,17 +148,15 @@ const EditClient = () => {
                     marginBottom: "10px",
                   }}
                 >
-                  <Avatar sx={{ background: "green", marginRight: "10px" }}>
+                  <Avatar sx={{ background: "#202c70", marginRight: "10px" }}>
                     <Edit />
                   </Avatar>
                   <Typography
                     variant="h4"
-                    component="h1"
+                    className="font"
+                    fontWeight="bolder"
                     align="center"
-                    sx={{
-                      padding: "10px 0",
-                      fontWeight: "bolder",
-                    }}
+                    color="202c70"
                   >
                     Update Client
                   </Typography>

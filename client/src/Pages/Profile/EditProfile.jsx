@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Loader";
+import "../../index.css";
 
 const EditProfile = () => {
   var regfirstname = /^[a-zA-Z]{2,30}$/;
@@ -121,14 +122,12 @@ const EditProfile = () => {
       ) : (
         <>
           {edit ? (
-            <Grid container>
+            <Grid container padding={3}>
               <Grid align="center" item lg={6} xs={12} sm={8} md={10} mx="auto">
-                <Paper
-                  elevation={24}
-                  sx={{ margin: "30px auto", padding: "38px 20px" }}
-                >
+                <Paper elevation={24} sx={{ padding: "30px" }}>
                   <Grid
                     item
+                    paddingBottom={3}
                     sx={{
                       display: "flex",
                       alignItems: "center",
@@ -141,12 +140,9 @@ const EditProfile = () => {
                     </Avatar>
                     <Typography
                       variant="h4"
-                      component="h1"
+                      className="font"
                       align="center"
-                      sx={{
-                        padding: "10px 0",
-                        fontWeight: "bolder",
-                      }}
+                      fontWeight={"bolder"}
                     >
                       Edit Profile
                     </Typography>

@@ -17,6 +17,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../Loader";
+import "../../index.css";
 
 const AddEnquiry = () => {
   const [emp, setEmp] = useState([]);
@@ -126,10 +127,10 @@ const AddEnquiry = () => {
       ) : (
         <>
           <Grid
+            padding={3}
             container
             align="center"
             sx={{
-              marginTop: "30px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -143,35 +144,25 @@ const AddEnquiry = () => {
               className="grid-hover"
               square="true"
             >
-              <Paper
-                elevation={24}
-                sx={{
-                  padding: "20px 20px",
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
-              >
+              <Paper elevation={24} sx={{ padding: "20px" }}>
                 <Grid
+                  paddingBottom={3}
                   item
                   sx={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    // marginBottom: "10px",
                   }}
                 >
-                  <Avatar sx={{ background: "green", marginRight: "10px" }}>
+                  <Avatar sx={{ background: "#202c70", marginRight: "10px" }}>
                     <RateReview />
                   </Avatar>
                   <Typography
+                    className="font"
                     variant="h4"
-                    component="h1"
+                    color="#202c70"
                     align="center"
-                    sx={{
-                      padding: "10px 0",
-                      fontWeight: "bolder",
-                    }}
+                    fontWeight={"bolder"}
                   >
                     Add Lead
                   </Typography>
@@ -184,7 +175,6 @@ const AddEnquiry = () => {
                         label="Firstname"
                         placeholder="Enter Your Firstname"
                         fullWidth
-                        // sx={{ margin: "20px 12px 0 0" }}
                         value={enquiry.firstname}
                         onChange={handleAddEnquiryChange}
                         name="firstname"
@@ -196,7 +186,6 @@ const AddEnquiry = () => {
                         label="Lastname"
                         placeholder="Enter Your Lastname"
                         fullWidth
-                        // sx={{ margin: "20px 12px 0 0" }}
                         value={enquiry.lastname}
                         onChange={handleAddEnquiryChange}
                         name="lastname"
@@ -208,7 +197,6 @@ const AddEnquiry = () => {
                         label="Email"
                         placeholder="Enter Your Email"
                         fullWidth
-                        // sx={{ margin: "25px 12px 0 0 " }}
                         value={enquiry.email}
                         onChange={handleAddEnquiryChange}
                         name="email"
@@ -221,7 +209,6 @@ const AddEnquiry = () => {
                         placeholder="Enter Your Number"
                         type="number"
                         fullWidth
-                        // sx={{ margin: "25px 12px 0 0 " }}
                         value={enquiry.phone}
                         onChange={handleAddEnquiryChange}
                         name="phone"
@@ -237,7 +224,6 @@ const AddEnquiry = () => {
                         fullWidth
                         value={enquiry.company}
                         onChange={handleAddEnquiryChange}
-                        // sx={{ margin: "20px 12px 0 0" }}
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -265,7 +251,6 @@ const AddEnquiry = () => {
                         variant="outlined"
                         name="enquiry"
                         placeholder="Lead Details"
-                        // sx={{ margin: "20px 12px 0 0" }}
                         label="Lead"
                         multiline
                         rows={4}

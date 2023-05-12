@@ -95,7 +95,7 @@ const Clients = () => {
           >
             <Typography
               className="font"
-              color="green"
+              color="#202c70"
               variant="h3"
               paddingBottom={3}
             >

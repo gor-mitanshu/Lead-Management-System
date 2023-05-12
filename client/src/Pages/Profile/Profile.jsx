@@ -53,7 +53,7 @@ const Profile = () => {
       ) : (
         <>
           {profile ? (
-            <Grid container>
+            <Grid container padding={3}>
               <Grid
                 align="center"
                 item
@@ -63,7 +63,7 @@ const Profile = () => {
                 md={10}
                 mx="auto"
               >
-                <Paper elevation={24} sx={{ margin: "30px auto" }}>
+                <Paper elevation={24}>
                   <Typography
                     variant="h4"
                     component="h1"
