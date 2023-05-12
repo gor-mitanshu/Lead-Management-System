@@ -121,3 +121,24 @@ thead {
 table {
   width: 100% !important;
 } */
+.accepted {
+  background-color: rgba(41, 167, 68, 0.8) !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+}
+.rejected {
+  background-color: #dc3535cc !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+}
+.pending {
+  background-color: rgb(248, 193, 43, 0.8) !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+}
+.accept {
+  color: rgba(41, 167, 68, 0.8) !important;
+}
+.reject {
+  color: #dc3535cc !important;
+}

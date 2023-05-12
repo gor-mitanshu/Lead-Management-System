@@ -54,15 +54,7 @@ const Profile = () => {
         <>
           {profile ? (
             <Grid container padding={3}>
-              <Grid
-                align="center"
-                item
-                lg={6}
-                xs={12}
-                sm={10}
-                md={10}
-                mx="auto"
-              >
+              <Grid align="center" item lg={6} xs={12} mx="auto">
                 <Paper elevation={24}>
                   <Typography
                     variant="h4"

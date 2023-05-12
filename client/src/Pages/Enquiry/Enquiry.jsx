@@ -238,16 +238,6 @@ const Enquiry = () => {
                       >
                         Enquiry
                       </TableCell> */}
-
-                      <TableCell
-                        sx={{
-                          background: "black",
-                          color: "white",
-                          textAlign: "center",
-                        }}
-                      >
-                        Actions
-                      </TableCell>
                       {role === "employee" ? (
                         <TableCell
                           sx={{
@@ -259,6 +249,15 @@ const Enquiry = () => {
                           Status
                         </TableCell>
                       ) : null}
+                      <TableCell
+                        sx={{
+                          background: "black",
+                          color: "white",
+                          textAlign: "center",
+                        }}
+                      >
+                        Actions
+                      </TableCell>
                     </TableRow>
                   </TableHead>
 
@@ -289,7 +288,25 @@ const Enquiry = () => {
                         {/* <TableCell sx={{ textAlign: "center" }}>
                           {row.enquiry}
                         </TableCell> */}
-
+                        {role === "employee" ? (
+                          <TableCell sx={{ textAlign: "center" }}>
+                            <Chip
+                              label={row.status}
+                              sx={{ width: "120px" }}
+                              className={
+                                row.status === "PENDING"
+                                  ? "pending"
+                                  : row.status === "COMPLETED"
+                                  ? "accepted"
+                                  : row.status === "REJECTED"
+                                  ? "rejected"
+                                  : ""
+                              }
+                              variant="contained"
+                              size="medium"
+                            />
+                          </TableCell>
+                        ) : null}
                         {role === "admin" ? (
                           <>
                             <TableCell
@@ -341,14 +358,14 @@ const Enquiry = () => {
                               </IconButton>
                               <IconButton
                                 aria-label="edit"
-                                color="success"
+                                className={"accept"}
                                 onClick={() => onAccept(row._id)}
                               >
                                 <ThumbUp />
                               </IconButton>
                               <IconButton
                                 aria-label="delete"
-                                color="error"
+                                className={"reject"}
                                 onClick={() => onReject(row._id)}
                               >
                                 <ThumbDown />
@@ -356,35 +373,6 @@ const Enquiry = () => {
                             </TableCell>
                           </>
                         )}
-                        {role === "employee" ? (
-                          <TableCell
-                            sx={{ textAlign: "center" }}
-                            className={
-                              row.status === "PENDING"
-                                ? "pending"
-                                : row.status === "COMPLETED"
-                                ? "accepted"
-                                : row.status === "REJECTED"
-                                ? "rejected"
-                                : ""
-                            }
-                          >
-                            <Chip
-                              label={row.status}
-                              color={
-                                row.status === "PENDING"
-                                  ? "warning"
-                                  : row.status === "COMPLETED"
-                                  ? "success"
-                                  : row.status === "REJECTED"
-                                  ? "error"
-                                  : ""
-                              }
-                              variant="contained"
-                              size="small"
-                            />
-                          </TableCell>
-                        ) : null}
                       </TableRow>
                     ))}
                   </TableBody>
