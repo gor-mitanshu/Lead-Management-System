@@ -124,7 +124,7 @@ const Enquiry = () => {
           <Loader />
         </>
       ) : (
-        <Grid container padding={3}>
+        <Grid container padding={2}>
           <Grid
             item
             sx={{
@@ -141,7 +141,7 @@ const Enquiry = () => {
               variant="h3"
               paddingBottom={3}
             >
-              Enquiry Details
+              Lead Details
             </Typography>
             {role === "admin" ? (
               <>

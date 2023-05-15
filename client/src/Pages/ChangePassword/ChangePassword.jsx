@@ -71,7 +71,7 @@ const ChangePassword = () => {
     <>
       <Grid
         container
-        padding={3}
+        padding={2}
         align="center"
         sx={{
           display: "flex",

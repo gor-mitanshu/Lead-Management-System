@@ -68,7 +68,7 @@ const Employee = () => {
           <Loader />
         </>
       ) : (
-        <Grid container padding={3}>
+        <Grid container padding={2}>
           <Grid
             item
             sx={{

@@ -63,7 +63,7 @@ const ViewEnquiry = () => {
         </>
       ) : (
         <>
-          <Grid container padding={3}>
+          <Grid container padding={2}>
             <Grid align="center" item lg={4} xs={12} sm={8} md={10} mx="auto">
               <Paper elevation={24} sx={{ padding: "30px" }}>
                 <Grid

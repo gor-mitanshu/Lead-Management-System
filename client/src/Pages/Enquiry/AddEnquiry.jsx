@@ -126,7 +126,7 @@ const AddEnquiry = () => {
       ) : (
         <>
           <Grid
-            padding={3}
+            padding={2}
             container
             align="center"
             sx={{

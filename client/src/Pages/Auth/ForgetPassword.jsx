@@ -61,6 +61,7 @@ const ForgetPassword = () => {
     <>
       <Grid
         container
+        padding={2}
         align="center"
         sx={{
           height: "100vh",
@@ -91,23 +92,21 @@ const ForgetPassword = () => {
               item
               lg={12}
               xs={12}
+              paddingBottom={3}
               sx={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <Avatar sx={{ background: "green", marginRight: "5px" }}>
+              <Avatar sx={{ background: "#202c70", marginRight: "5px" }}>
                 <Lock />
               </Avatar>
               <Typography
                 variant="h5"
-                component="h1"
                 align="center"
-                sx={{
-                  padding: "10px 0",
-                  fontWeight: "bolder",
-                }}
+                color="#202c70"
+                fontWeight={"bolder"}
               >
                 Forget Password
               </Typography>

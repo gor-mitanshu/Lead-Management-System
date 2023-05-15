@@ -122,7 +122,7 @@ const EditProfile = () => {
       ) : (
         <>
           {edit ? (
-            <Grid container padding={3}>
+            <Grid container padding={2}>
               <Grid align="center" item lg={6} xs={12} sm={8} md={10} mx="auto">
                 <Paper elevation={24} sx={{ padding: "30px" }}>
                   <Grid
@@ -132,15 +132,15 @@ const EditProfile = () => {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      marginBottom: "10px",
                     }}
                   >
-                    <Avatar sx={{ background: "green", marginRight: "10px" }}>
+                    <Avatar sx={{ background: "#202c70", marginRight: "10px" }}>
                       <ModeEdit />
                     </Avatar>
                     <Typography
                       variant="h4"
                       className="font"
+                      color="#202c70"
                       align="center"
                       fontWeight={"bolder"}
                     >

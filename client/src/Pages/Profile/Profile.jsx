@@ -53,7 +53,7 @@ const Profile = () => {
       ) : (
         <>
           {profile ? (
-            <Grid container padding={3}>
+            <Grid container padding={2}>
               <Grid align="center" item lg={6} xs={12} mx="auto">
                 <Paper elevation={24}>
                   <Typography

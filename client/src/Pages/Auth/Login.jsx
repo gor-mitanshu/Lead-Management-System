@@ -61,6 +61,7 @@ const Login = () => {
   return (
     <>
       <Grid
+        padding={2}
         container
         align="center"
         sx={{
@@ -97,12 +98,12 @@ const Login = () => {
                 justifyContent: "center",
               }}
             >
-              <Avatar sx={{ background: "green", marginRight: "10px" }}>
+              <Avatar sx={{ background: "#202c70", marginRight: "10px" }}>
                 <Lock />
               </Avatar>
               <Typography
                 variant="h4"
-                component="h1"
+                color="#202c70"
                 align="center"
                 sx={{
                   padding: "10px 0",

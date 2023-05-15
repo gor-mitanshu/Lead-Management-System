@@ -101,6 +101,7 @@ const Register = () => {
     <>
       <Grid
         container
+        padding={2}
         align="center"
         sx={{
           height: "100vh",
@@ -127,12 +128,12 @@ const Register = () => {
                 justifyContent: "center",
               }}
             >
-              <Avatar sx={{ background: "green", marginRight: "10px" }}>
+              <Avatar sx={{ background: "#202c70", marginRight: "10px" }}>
                 <HowToReg />
               </Avatar>
               <Typography
                 variant="h4"
-                component="h1"
+                color="#202c70"
                 align="center"
                 sx={{
                   padding: "10px 0",
