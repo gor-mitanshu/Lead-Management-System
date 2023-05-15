@@ -8,7 +8,7 @@
     "start": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Mitanshu Gor",
   "license": "ISC",
   "dependencies": {
     "@wcj/generate-password": "^1.0.3",
