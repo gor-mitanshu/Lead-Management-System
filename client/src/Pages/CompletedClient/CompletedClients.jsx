@@ -26,10 +26,10 @@ const Clients = () => {
 
   const getEmpClient = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API}/getempclient/${id}`)
+      .get(`${process.env.REACT_APP_API}/getempenq/${id}`)
       .then((res) => {
         setLoading(false);
-        setClient(res.data.data);
+        setClient(res.data.data.filter((e) => e.status === "COMPLETED"));
       });
   };
 

@@ -50,6 +50,13 @@ const Dashboard = () => {
       .get(`${process.env.REACT_APP_API}/getempenq/${id}`)
       .then((response) => {
         setLeads(response.data.data);
+        const unique = response.data.data.filter(
+          (value, index, self) =>
+            index === self.findIndex((t) => t.email === value.email)
+        );
+        console.log(unique);
+
+        setClient(unique);
         setTotalLastMonthleads(getLastMonthLeads(response.data.data));
         setTotalLastYearleads(getYearLeads(response.data.data));
       });
