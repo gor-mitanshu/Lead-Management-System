@@ -73,16 +73,19 @@ const Enquiry = () => {
   }, [id, role]);
 
   const onEnqDelete = async (id) => {
-    await axios
-      .delete(`${process.env.REACT_APP_API}/api/deleteenquiry/${id}`)
-      .then((response) => {
-        if (response.status === 200) {
-          getEnqData();
-          toast.success(response.data.message);
-        } else {
-          toast.error(response.data.message);
-        }
-      });
+    try {
+      const res = await axios.delete(
+        `${process.env.REACT_APP_API}/api/deleteenquiry/${id}`
+      );
+      if (res && res.data.success) {
+        getEnqData();
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   return (

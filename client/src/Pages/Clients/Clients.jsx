@@ -61,16 +61,19 @@ const Clients = () => {
   }, [id, role]);
 
   const onDelete = async (id) => {
-    await axios
-      .delete(`${process.env.REACT_APP_API}/api/deleteclient/${id}`)
-      .then((response) => {
-        if (response.status === 200) {
-          getData();
-          toast.success(response.data.message);
-        } else {
-          toast.error(response.data.message);
-        }
-      });
+    try {
+      const res = await axios.delete(
+        `${process.env.REACT_APP_API}/api/deleteclient/${id}`
+      );
+      if (res && res.data.success) {
+        getData();
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
   return (
     <>

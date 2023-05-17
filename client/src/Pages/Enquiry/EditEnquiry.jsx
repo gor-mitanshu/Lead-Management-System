@@ -125,26 +125,30 @@ const EditEnquiry = () => {
       toast.error("Please Assign any Employee");
       return;
     }
-    const body = {
-      firstname: updatenquiry.firstname,
-      lastname: updatenquiry.lastname,
-      email: updatenquiry.email,
-      phone: updatenquiry.phone,
-      company: updatenquiry.company,
-      enquiry: updatenquiry.enquiry,
-      assign: updatenquiry.assign,
-      status: updatenquiry.status,
-    };
-    axios
-      .put(`${process.env.REACT_APP_API}/api/updateenquiry/${id}`, body)
-      .then((response) => {
-        if (response) {
-          toast.success(response.data.message);
-          navigate("/enquiry");
-        } else {
-          toast.error(response.data.message);
-        }
-      });
+    try {
+      const body = {
+        firstname: updatenquiry.firstname,
+        lastname: updatenquiry.lastname,
+        email: updatenquiry.email,
+        phone: updatenquiry.phone,
+        company: updatenquiry.company,
+        enquiry: updatenquiry.enquiry,
+        assign: updatenquiry.assign,
+        status: updatenquiry.status,
+      };
+      const res = await axios.put(
+        `${process.env.REACT_APP_API}/api/updateenquiry/${id}`,
+        body
+      );
+      if (res && res.data.success) {
+        toast.success(res.data.message);
+        navigate("/enquiry");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
   return (
     <>

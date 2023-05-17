@@ -94,28 +94,29 @@ const AddEnquiry = () => {
       toast.error("Please send us a Designation");
       return;
     }
-    const body = {
-      firstname: enquiry.firstname,
-      lastname: enquiry.lastname,
-      email: enquiry.email,
-      phone: enquiry.phone,
-      company: enquiry.company,
-      enquiry: enquiry.enquiry,
-      assign: enquiry.assign,
-    };
-    await axios
-      .post(`${process.env.REACT_APP_API}/api/addenquiry`, body)
-      .then((response) => {
-        if (response.status === 200) {
-          toast.success(response.data.message);
-          navigate("/enquiry");
-        }
-      })
-      .catch((error) => {
-        if (error.response.status === 404) {
-          toast.error(error.response.data.message);
-        }
-      });
+    try {
+      const body = {
+        firstname: enquiry.firstname,
+        lastname: enquiry.lastname,
+        email: enquiry.email,
+        phone: enquiry.phone,
+        company: enquiry.company,
+        enquiry: enquiry.enquiry,
+        assign: enquiry.assign,
+      };
+      const res = await axios.post(
+        `${process.env.REACT_APP_API}/api/addenquiry`,
+        body
+      );
+      if (res && res.data.success) {
+        toast.success(res.data.message);
+        navigate("/enquiry");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
   return (
     <>

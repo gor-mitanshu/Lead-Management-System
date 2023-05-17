@@ -192,7 +192,7 @@ app.post('/api/addclient', async (req, res) => {
         if (!!existingclient) {
             return res.status(409).send({
                 success: false,
-                error: "Client Already Added!"
+                message: "Client Already Added!"
             })
         } else {
             const findemployee = await User.findById({ _id: req.body.assign })
@@ -340,6 +340,25 @@ app.delete('/api/deleteclient/:id', async (req, res) => {
     }
 })
 
+// Get client by employee id
+app.get('/getempclient/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const getempclient = await Client.find({ assign: id });
+        if (getempclient) {
+            return res.status(200).send({
+                success: true, message: "Success",
+                data: getempclient
+            })
+        }
+    } catch (error) {
+        res.status(404).send({
+            success: false,
+            message: "Something went wrong",
+            error
+        })
+    }
+})
 
 
 // EMPLOYEE SECTION 
@@ -523,7 +542,7 @@ app.post('/api/addenquiry', async (req, res) => {
         await enquiry.save()
         return res.status(200).json({
             success: true,
-            message: "Enquiry Added Successfully",
+            message: "Lead Added Successfully",
             data: enquiry
         })
     } catch (error) {
@@ -750,6 +769,27 @@ app.delete('/api/deleteenquiry/:id', async (req, res) => {
     }
 })
 
+// Get enquiry by employee id
+app.get('/getempenq/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const getempenq = await Enquiry.find({ assign: id });
+        if (getempenq) {
+            return res.status(200).send({
+                success: true, message: "Success",
+                data: getempenq
+            })
+        }
+    } catch (error) {
+        res.status(404).send({
+            success: false,
+            message: "Some Error Occured",
+            error
+        })
+    }
+})
+
+
 // Change Password
 app.put('/api/changepassword/:id', async (req, res) => {
     try {
@@ -771,46 +811,6 @@ app.put('/api/changepassword/:id', async (req, res) => {
         res.status(404).send({
             success: false,
             message: "Something went wrong",
-            error
-        })
-    }
-})
-
-// Get client by employee id
-app.get('/getempclient/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const getempclient = await Client.find({ assign: id });
-        if (getempclient) {
-            return res.status(200).send({
-                success: true, message: "Success",
-                data: getempclient
-            })
-        }
-    } catch (error) {
-        res.status(404).send({
-            success: false,
-            message: "Something went wrong",
-            error
-        })
-    }
-})
-
-// Get client by employee id
-app.get('/getempenq/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const getempenq = await Enquiry.find({ assign: id });
-        if (getempenq) {
-            return res.status(200).send({
-                success: true, message: "Success",
-                data: getempenq
-            })
-        }
-    } catch (error) {
-        res.status(404).send({
-            success: false,
-            message: "Some Error Occured",
             error
         })
     }

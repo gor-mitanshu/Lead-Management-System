@@ -90,26 +90,27 @@ const AddClient = () => {
       toast.error("Please Assign any Employee");
       return;
     }
-    const body = {
-      firstname: addClient.firstname,
-      lastname: addClient.lastname,
-      email: addClient.email,
-      phone: addClient.phone,
-      assign: addClient.assign,
-    };
-    await axios
-      .post(`${process.env.REACT_APP_API}/api/addclient`, body)
-      .then((response) => {
-        if (response?.status === 200) {
-          toast.success(response.data.message);
-          navigate("/clients");
-        }
-      })
-      .catch((error) => {
-        if (error?.response.status === 404) {
-          toast.error(error.response.data.message);
-        }
-      });
+    try {
+      const body = {
+        firstname: addClient.firstname,
+        lastname: addClient.lastname,
+        email: addClient.email,
+        phone: addClient.phone,
+        assign: addClient.assign,
+      };
+      const res = await axios.post(
+        `${process.env.REACT_APP_API}/api/addclient`,
+        body
+      );
+      if (res && res.data.success) {
+        toast.success(res.data.message);
+        navigate("/clients");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
   return (
     <>
