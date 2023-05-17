@@ -250,8 +250,8 @@ const AddEnquiry = () => {
                         fullWidth
                         variant="outlined"
                         name="enquiry"
-                        placeholder="Lead Details"
-                        label="Lead"
+                        placeholder="Details"
+                        label="Comments"
                         multiline
                         rows={4}
                         value={enquiry.enquiry}

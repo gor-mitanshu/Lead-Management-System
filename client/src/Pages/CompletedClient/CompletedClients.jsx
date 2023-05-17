@@ -1,6 +1,5 @@
-import { Delete, Edit, PersonAddAlt } from "@mui/icons-material";
+import { Delete, Edit } from "@mui/icons-material";
 import {
-  Button,
   Grid,
   IconButton,
   Paper,
@@ -15,7 +14,7 @@ import {
 import Loader from "../Loader";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Clients = () => {
@@ -36,11 +35,12 @@ const Clients = () => {
 
   const getData = async () => {
     let response = await axios.get(
-      `${process.env.REACT_APP_API}/api/getclients`
+      `${process.env.REACT_APP_API}/api/getenquiries`
     );
+
     if (response.status === 200) {
       setLoading(false);
-      setClient(response.data.data);
+      setClient(response.data.data.filter((e) => e.status === "COMPLETED"));
     }
   };
   useEffect(() => {
@@ -101,20 +101,6 @@ const Clients = () => {
             >
               Clients
             </Typography>
-
-            {role === "admin" ? (
-              <>
-                <Link
-                  to="/addclient"
-                  className="btn-link"
-                  style={{ marginBottom: "24px" }}
-                >
-                  <Button variant="contained" color="primary">
-                    <PersonAddAlt sx={{ paddingRight: "5px" }} /> Add Client
-                  </Button>
-                </Link>
-              </>
-            ) : null}
           </Grid>
 
           <Grid item lg={12} sm={12} xs={11}>
@@ -167,6 +153,15 @@ const Clients = () => {
                       >
                         Phone
                       </TableCell>
+                      <TableCell
+                        sx={{
+                          background: "black",
+                          color: "white",
+                          textAlign: "center",
+                        }}
+                      >
+                        Company{" "}
+                      </TableCell>
 
                       {role === "admin" ? (
                         <>
@@ -207,6 +202,9 @@ const Clients = () => {
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
                           {row.phone}
+                        </TableCell>
+                        <TableCell sx={{ textAlign: "center" }}>
+                          {row.company}
                         </TableCell>
 
                         {role === "admin" ? (

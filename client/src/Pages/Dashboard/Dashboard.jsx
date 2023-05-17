@@ -60,27 +60,34 @@ const Dashboard = () => {
       .get(`${process.env.REACT_APP_API}/api/getenquiries`)
       .then((response) => {
         setLeads(response.data.data);
+        const unique = response.data.data.filter(
+          (value, index, self) =>
+            index === self.findIndex((t) => t.email === value.email)
+        );
+        console.log(unique);
+
+        setClient(unique);
         setTotalLastMonthleads(getLastMonthLeads(response.data.data));
         setTotalLastYearleads(getYearLeads(response.data.data));
       });
   };
 
-  const getEmpClient = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API}/getempclient/${id}`)
-      .then((res) => {
-        setClient(res.data.data);
-      });
-  };
+  // const getEmpClient = async () => {
+  //   await axios
+  //     .get(`${process.env.REACT_APP_API}/getempclient/${id}`)
+  //     .then((res) => {
+  //       setClient(res.data.data);
+  //     });
+  // };
 
-  const getClientData = async () => {
-    let response = await axios.get(
-      `${process.env.REACT_APP_API}/api/getclients`
-    );
-    if (response.status === 200) {
-      setClient(response.data.data);
-    }
-  };
+  // const getClientData = async () => {
+  //   let response = await axios.get(
+  //     `${process.env.REACT_APP_API}/api/getclients`
+  //   );
+  //   if (response.status === 200) {
+  //     setClient(response.data.data);
+  //   }
+  // };
 
   const getMonthlyData = () => {
     var date = new Date();
@@ -168,10 +175,10 @@ const Dashboard = () => {
     setRole(data.role);
     if (role === "admin") {
       getEnqData();
-      getClientData();
+      // getClientData();
     } else if (role === "employee") {
       getEmpEnquiry();
-      getEmpClient();
+      // getEmpClient();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, role]);
@@ -290,7 +297,7 @@ const Dashboard = () => {
                     variant="h5"
                     sx={{ fontSize: "2rem" }}
                   >
-                    {client.filter((e) => e.role === "client").length}
+                    {client.length}
                   </Typography>
                   <Typography variant="subtitle1" color="#fff" component="div">
                     Total Clients

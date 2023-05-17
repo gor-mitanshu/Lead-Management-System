@@ -9,10 +9,12 @@ import ForgetPassword from './Pages/Auth/ForgetPassword';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Profile from './Pages/Profile/Profile';
 import EditProfile from './Pages/Profile/EditProfile';
-import Clients from './Pages/Clients/Clients';
-import AddClient from './Pages/Clients/AddClient';
-import EditClient from './Pages/Clients/EditClient';
+// import Clients from './Pages/Clients/Clients';
+// import AddClient from './Pages/Clients/AddClient';
+// import EditClient from './Pages/Clients/EditClient';
+import Clients from './Pages/CompletedClient/CompletedClients';
 import Employee from './Pages/Employee/Employee';
+import EditClient from './Pages/CompletedClient/EditCompletedClient';
 import AddEmployee from './Pages/Employee/AddEmployee';
 import EditEmployee from './Pages/Employee/EditEmployee';
 import Enquiry from './Pages/Enquiry/Enquiry';
@@ -54,8 +56,9 @@ function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/editprofile/:id' element={<EditProfile />} />
             <Route path='/clients' element={<Clients />} />
-            <Route path='/addclient' element={role === "admin" ? <AddClient /> : <PageNotFound />} />
-            <Route path='/editclient/:id' element={role === "admin" ? <EditClient /> : <PageNotFound />} />
+            {/* <Route path='/addclient' element={role === "admin" ? <AddClient /> : <PageNotFound />} /> */}
+            {/* <Route path='/editclient/:id' element={role === "admin" ? <EditClient /> : <PageNotFound />} /> */}
+            <Route path='/editclient/:id' element={<EditClient />} />
             <Route path='/employees' element={<Employee />} />
             <Route path='/addemployee' element={role === "admin" ? <AddEmployee /> : <PageNotFound />} />
             <Route path='/editemployee/:id' element={role === "admin" ? <EditEmployee /> : <PageNotFound />} />

@@ -3,11 +3,15 @@ import {
   Avatar,
   Button,
   ButtonGroup,
+  FormControl,
   // FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
   // InputLabel,
   // MenuItem,
   Paper,
+  Select,
   // Select,
   TextField,
   Typography,
@@ -21,6 +25,7 @@ import "../../index.css";
 
 const EditClient = () => {
   // const [emp, setEmp] = useState([]);
+  const [status, setStatus] = useState([]);
   const [isloading, setLoading] = useState(false);
   const getEmpData = async () => {
     await axios
@@ -42,6 +47,7 @@ const EditClient = () => {
   };
   useEffect(() => {
     setLoading(true);
+    setStatus(["PENDING", "REJECTED", "COMPLETED"]);
     setTimeout(() => {
       getEmpData();
     }, 650);
@@ -62,6 +68,7 @@ const EditClient = () => {
     phone: "",
     assign: "",
     employeename: "",
+    status: "",
   });
   const handleEditClient = (e) => {
     const { name, value } = e.target;
@@ -73,7 +80,7 @@ const EditClient = () => {
 
   const viewClient = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API}/api/geteditclient/${id}`)
+      .get(`${process.env.REACT_APP_API}/api/enquiry/${id}`)
       .then((response) => {
         if (response.status === 200) {
           setUpdateClient(response.data.data);
@@ -115,9 +122,10 @@ const EditClient = () => {
       email: updateclient.email,
       phone: updateclient.phone,
       assign: updateclient.assign,
+      status: updateclient.status,
     };
     axios
-      .put(`${process.env.REACT_APP_API}/api/updateclient/${id}`, body)
+      .put(`${process.env.REACT_APP_API}/api/updateenquiry/${id}`, body)
       .then((response) => {
         if (response) {
           toast.success(response.data.message);
@@ -206,6 +214,38 @@ const EditClient = () => {
                         value={updateclient.phone}
                         onChange={handleEditClient}
                       />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <TextField
+                        label="Company"
+                        placeholder="Enter Your Company"
+                        type="text"
+                        fullWidth
+                        name="company"
+                        value={updateclient.company}
+                        onChange={handleEditClient}
+                      />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <FormControl fullWidth align="left">
+                        <InputLabel id="workExp">Status</InputLabel>
+                        <Select
+                          labelId="workExp"
+                          label="Work Experience"
+                          className="text-start"
+                          name="status"
+                          value={updateclient.status}
+                          onChange={handleEditClient}
+                        >
+                          {status.map((row, index) => (
+                            <MenuItem value={row} key={index}>
+                              {row}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
                     </Grid>
 
                     {/* <Grid item xs={12}>
