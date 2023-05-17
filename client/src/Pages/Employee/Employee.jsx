@@ -50,16 +50,20 @@ const Employee = () => {
   }, []);
 
   const onEmpDelete = async (id) => {
-    await axios
-      .delete(`${process.env.REACT_APP_API}/api/deleteemployee/${id}`)
-      .then((response) => {
-        if (response.status === 200) {
-          getEmpData();
-          toast.success(response.data.message);
-        } else {
-          toast.error(response.data.message);
-        }
-      });
+    try {
+      const res = await axios.delete(
+        `${process.env.REACT_APP_API}/api/deleteemployee/${id}`
+      );
+
+      if (res && res.data.success) {
+        getEmpData();
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.data.message);
+    }
   };
   return (
     <>

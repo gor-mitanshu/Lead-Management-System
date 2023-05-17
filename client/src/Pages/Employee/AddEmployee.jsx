@@ -56,25 +56,27 @@ const AddEmployee = () => {
       return;
     }
 
-    const body = {
-      firstname: addEmp.firstname,
-      lastname: addEmp.lastname,
-      email: addEmp.email,
-      phone: addEmp.phone,
-    };
-    await axios
-      .post(`${process.env.REACT_APP_API}/api/addemployees`, body)
-      .then((response) => {
-        if (response?.status === 200) {
-          toast.success(response.data.message);
-          navigate("/employees");
-        }
-      })
-      .catch((error) => {
-        if (error?.response.status === 404) {
-          toast.error(error.response.data.message);
-        }
-      });
+    try {
+      const body = {
+        firstname: addEmp.firstname,
+        lastname: addEmp.lastname,
+        email: addEmp.email,
+        phone: addEmp.phone,
+      };
+      const res = await axios.post(
+        `${process.env.REACT_APP_API}/api/addemployees`,
+        body
+      );
+
+      if (res && res.data.success) {
+        toast.success(res.data.message);
+        navigate("/employees");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   useEffect(() => {

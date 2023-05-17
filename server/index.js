@@ -29,7 +29,7 @@ app.post('/api/adminregister', async (req, res) => {
         if (!!existingadmin) {
             return res.status(409).send({
                 success: false,
-                error: "Admin Already Registered!"
+                message: "Admin Already Registered!"
             })
         } else {
             const admin = new User({
@@ -350,7 +350,7 @@ app.post('/api/addemployees', async (req, res) => {
         if (!!existingemployee) {
             return res.status(409).send({
                 success: false,
-                error: "Employee Already Added!"
+                message: "Employee Already Added!"
             })
         } else {
             const hashpassword = generatePassword.generate({

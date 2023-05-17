@@ -86,6 +86,7 @@ const Register = () => {
           key: user.key,
         }
       );
+      console.log(res);
       if (res && res.data.success) {
         toast.success(res.data.message);
         navigate("/login");
@@ -94,7 +95,7 @@ const Register = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.data.message);
+      toast.error(error.response?.data.message);
     }
   };
   return (

@@ -90,23 +90,27 @@ const EditEmployee = () => {
       toast.error("Please Enter the Valid Phone Number");
       return;
     }
-    const body = {
-      firstname: updatEmp.firstname,
-      lastname: updatEmp.lastname,
-      email: updatEmp.email,
-      phone: updatEmp.phone,
-      password: updatEmp.password,
-    };
-    axios
-      .put(`${process.env.REACT_APP_API}/api/editemployee/${id}`, body)
-      .then((response) => {
-        if (response) {
-          toast.success("Updated Data Successfully");
-          navigate("/employees");
-        } else {
-          toast.error("Error Updating");
-        }
-      });
+    try {
+      const body = {
+        firstname: updatEmp.firstname,
+        lastname: updatEmp.lastname,
+        email: updatEmp.email,
+        phone: updatEmp.phone,
+        password: updatEmp.password,
+      };
+      const res = await axios.put(
+        `${process.env.REACT_APP_API}/api/editemployee/${id}`,
+        body
+      );
+      if (res && res.data.success) {
+        toast.success(res.data.message);
+        navigate("/employees");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
   return (
     <>
