@@ -1,11 +1,4 @@
-import {
-  Delete,
-  Edit,
-  PersonAddAlt,
-  ThumbDown,
-  ThumbUp,
-  Visibility,
-} from "@mui/icons-material";
+import { Delete, Edit, PersonAddAlt, Visibility } from "@mui/icons-material";
 import {
   Button,
   Chip,
@@ -92,31 +85,6 @@ const Enquiry = () => {
       });
   };
 
-  const onAccept = async (id) => {
-    await axios
-      .put(`${process.env.REACT_APP_API}/api/acceptenquiry/${id}`)
-      .then((response) => {
-        if (response.status === 200) {
-          getEmpEnquiry();
-          toast.success("Lead Status Accepted");
-        } else {
-          toast.error("Something went wrong");
-        }
-      });
-  };
-  const onReject = async (id) => {
-    await axios
-      .put(`${process.env.REACT_APP_API}/api/rejectedenquiry/${id}`)
-      .then((response) => {
-        if (response.status === 200) {
-          getEmpEnquiry();
-          toast.error("Lead Status Rejected");
-        } else {
-          toast.error("Something went wrong");
-        }
-      });
-  };
-
   return (
     <>
       {isloading ? (
@@ -141,7 +109,7 @@ const Enquiry = () => {
               variant="h3"
               paddingBottom={3}
             >
-              Lead Details
+              Leads
             </Typography>
             {role === "admin" ? (
               <>
@@ -208,15 +176,6 @@ const Enquiry = () => {
                       >
                         Phone
                       </TableCell>
-                      {/* <TableCell
-                        sx={{
-                          background: "black",
-                          color: "white",
-                          textAlign: "center",
-                        }}
-                      >
-                        Company
-                      </TableCell> */}
                       {role === "admin" ? (
                         <TableCell
                           sx={{
@@ -228,27 +187,16 @@ const Enquiry = () => {
                           Assign to
                         </TableCell>
                       ) : null}
-
-                      {/* <TableCell
+                      <TableCell
                         sx={{
                           background: "black",
                           color: "white",
                           textAlign: "center",
                         }}
                       >
-                        Enquiry
-                      </TableCell> */}
-                      {role === "employee" ? (
-                        <TableCell
-                          sx={{
-                            background: "black",
-                            color: "white",
-                            textAlign: "center",
-                          }}
-                        >
-                          Status
-                        </TableCell>
-                      ) : null}
+                        Status
+                      </TableCell>
+
                       <TableCell
                         sx={{
                           background: "black",
@@ -276,37 +224,29 @@ const Enquiry = () => {
                         <TableCell sx={{ textAlign: "center" }}>
                           {row.phone}
                         </TableCell>
-                        {/* <TableCell sx={{ textAlign: "center" }}>
-                          {row.company}
-                        </TableCell> */}
                         {role === "admin" ? (
                           <TableCell sx={{ textAlign: "center" }}>
                             {row.employeename}
                           </TableCell>
                         ) : null}
+                        <TableCell sx={{ textAlign: "center" }}>
+                          <Chip
+                            label={row.status}
+                            sx={{ width: "120px" }}
+                            className={
+                              row.status === "PENDING"
+                                ? "pending"
+                                : row.status === "COMPLETED"
+                                ? "accepted"
+                                : row.status === "REJECTED"
+                                ? "rejected"
+                                : ""
+                            }
+                            variant="contained"
+                            size="medium"
+                          />
+                        </TableCell>
 
-                        {/* <TableCell sx={{ textAlign: "center" }}>
-                          {row.enquiry}
-                        </TableCell> */}
-                        {role === "employee" ? (
-                          <TableCell sx={{ textAlign: "center" }}>
-                            <Chip
-                              label={row.status}
-                              sx={{ width: "120px" }}
-                              className={
-                                row.status === "PENDING"
-                                  ? "pending"
-                                  : row.status === "COMPLETED"
-                                  ? "accepted"
-                                  : row.status === "REJECTED"
-                                  ? "rejected"
-                                  : ""
-                              }
-                              variant="contained"
-                              size="medium"
-                            />
-                          </TableCell>
-                        ) : null}
                         {role === "admin" ? (
                           <>
                             <TableCell
@@ -358,17 +298,12 @@ const Enquiry = () => {
                               </IconButton>
                               <IconButton
                                 aria-label="edit"
-                                className={"accept"}
-                                onClick={() => onAccept(row._id)}
+                                color="info"
+                                onClick={() =>
+                                  navigate(`/editenquiry/${row._id}`)
+                                }
                               >
-                                <ThumbUp />
-                              </IconButton>
-                              <IconButton
-                                aria-label="delete"
-                                className={"reject"}
-                                onClick={() => onReject(row._id)}
-                              >
-                                <ThumbDown />
+                                <Edit />
                               </IconButton>
                             </TableCell>
                           </>

@@ -21,6 +21,7 @@ import "../../index.css";
 
 const EditEnquiry = () => {
   const [emp, setEmp] = useState([]);
+  const [status, setStatus] = useState([]);
   const [isloading, setLoading] = useState(false);
   const getEmpData = async () => {
     await axios
@@ -42,6 +43,7 @@ const EditEnquiry = () => {
   };
   useEffect(() => {
     setLoading(true);
+    setStatus(["PENDING", "REJECTED", "COMPLETED"]);
     setTimeout(() => {
       getEmpData();
     }, 650);
@@ -54,6 +56,13 @@ const EditEnquiry = () => {
   var regemail =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   var regphone = /^[1-9]\d{9}$/;
+
+  const [role, setRole] = useState();
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("auth")).result.token;
+    const data = JSON.parse(atob(token.split(".")[1])).admin;
+    setRole(data.role);
+  }, []);
 
   const [updatenquiry, setUpdatenquiry] = useState({
     firstname: "",
@@ -174,6 +183,7 @@ const EditEnquiry = () => {
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                       <TextField
+                        disabled={role === "admin" ? false : true}
                         label="Firstname"
                         placeholder="Enter Your Firstname"
                         fullWidth
@@ -185,6 +195,7 @@ const EditEnquiry = () => {
 
                     <Grid item xs={12} sm={6}>
                       <TextField
+                        disabled={role === "admin" ? false : true}
                         label="Lastname"
                         placeholder="Enter Your Lastname"
                         fullWidth
@@ -196,6 +207,7 @@ const EditEnquiry = () => {
 
                     <Grid item xs={12}>
                       <TextField
+                        disabled={role === "admin" ? false : true}
                         label="Email"
                         placeholder="Enter Your Email"
                         fullWidth
@@ -207,6 +219,7 @@ const EditEnquiry = () => {
 
                     <Grid item xs={12}>
                       <TextField
+                        disabled={role === "admin" ? false : true}
                         label="Phone Number"
                         placeholder="Enter Your Number"
                         type="number"
@@ -218,6 +231,7 @@ const EditEnquiry = () => {
                     </Grid>
                     <Grid item xs={12}>
                       <TextField
+                        disabled={role === "admin" ? false : true}
                         label="Company"
                         placeholder="Enter Your Company Name"
                         name="company"
@@ -228,10 +242,37 @@ const EditEnquiry = () => {
                         onChange={handleEditEnq}
                       />
                     </Grid>
+
                     <Grid item xs={12}>
                       <FormControl fullWidth align="left">
-                        <InputLabel id="workExp">Work Assign To</InputLabel>
+                        <InputLabel id="workExp">Status</InputLabel>
                         <Select
+                          labelId="workExp"
+                          label="Work Experience"
+                          className="text-start"
+                          name="status"
+                          value={updatenquiry.status}
+                          onChange={handleEditEnq}
+                        >
+                          {status.map((row, index) => (
+                            <MenuItem value={row} key={index}>
+                              {row}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <FormControl fullWidth align="left">
+                        <InputLabel
+                          id="workExp"
+                          disabled={role === "admin" ? false : true}
+                        >
+                          Work Assign To
+                        </InputLabel>
+                        <Select
+                          disabled={role === "admin" ? false : true}
                           labelId="workExp"
                           label="Work Experience"
                           className="text-start"
@@ -247,8 +288,10 @@ const EditEnquiry = () => {
                         </Select>
                       </FormControl>
                     </Grid>
+
                     <Grid item xs={12}>
                       <TextField
+                        disabled={role === "admin" ? false : true}
                         fullWidth
                         variant="outlined"
                         name="enquiry"

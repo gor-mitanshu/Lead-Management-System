@@ -2,8 +2,12 @@ import { Visibility } from "@mui/icons-material";
 import {
   Avatar,
   Button,
+  FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
   Paper,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
@@ -26,6 +30,7 @@ const ViewEnquiry = () => {
     status: "",
   });
 
+  const [status, setStatus] = useState([]);
   const [isloading, setLoading] = useState(false);
   const { id } = useParams("");
 
@@ -49,6 +54,7 @@ const ViewEnquiry = () => {
   };
 
   useEffect(() => {
+    setStatus(["PENDING", "REJECTED", "COMPLETED"]);
     setLoading(true);
     setTimeout(() => {
       viewEnq();
@@ -141,6 +147,26 @@ const ViewEnquiry = () => {
                       value={viewenquiry.company}
                     />
                   </Grid>
+
+                  <Grid item xs={12}>
+                    <FormControl fullWidth align="left">
+                      <InputLabel id="workExp">Status</InputLabel>
+                      <Select
+                        labelId="workExp"
+                        label="Work Experience"
+                        className="text-start"
+                        name="status"
+                        value={viewenquiry.status}
+                      >
+                        {status.map((row, index) => (
+                          <MenuItem value={row} key={index}>
+                            {row}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
                   <Grid item xs={12}>
                     <TextField
                       label="Assign"

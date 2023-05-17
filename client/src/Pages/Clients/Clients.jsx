@@ -96,7 +96,7 @@ const Clients = () => {
               variant="h3"
               paddingBottom={3}
             >
-              Client Details
+              Clients
             </Typography>
 
             {role === "admin" ? (

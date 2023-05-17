@@ -85,7 +85,7 @@ const Employee = () => {
               variant="h3"
               paddingBottom={3}
             >
-              Employee Details
+              Employees
             </Typography>
             <Link
               to="/addemployee"

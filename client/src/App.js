@@ -61,7 +61,7 @@ function App() {
             <Route path='/editemployee/:id' element={role === "admin" ? <EditEmployee /> : <PageNotFound />} />
             <Route path='/enquiry' element={<Enquiry />} />
             <Route path='/addenquiry' element={role === "admin" ? <AddEnquiry /> : <PageNotFound />} />
-            <Route path='/editenquiry/:id' element={role === "admin" ? <EditEnquiry /> : <PageNotFound />} />
+            <Route path='/editenquiry/:id' element={<EditEnquiry />} />
             <Route path='/viewenquiry/:id' element={<ViewEnquiry />} />
             <Route path='/changepassword/:id' element={<ChangePassword />} />
           </Route>

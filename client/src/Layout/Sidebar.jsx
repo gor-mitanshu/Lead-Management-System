@@ -136,10 +136,7 @@ const SideBar = () => {
                 <ListItemIcon sx={{ color: "white" }}>
                   <RateReview />
                 </ListItemIcon>
-                <ListItemText
-                  primary="Leads List"
-                  sx={{ whiteSpace: "nowrap" }}
-                />
+                <ListItemText primary="Leads" sx={{ whiteSpace: "nowrap" }} />
               </ListItemButton>
             </ListItem>
           </NavLink>
