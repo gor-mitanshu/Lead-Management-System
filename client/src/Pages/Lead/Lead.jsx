@@ -29,7 +29,7 @@ const Lead = () => {
 
   const getEmpLead = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API}/getempenq/${id}`)
+      .get(`${process.env.REACT_APP_API}/getemplead/${id}`)
       .then((res) => {
         setLoading(false);
         setEnq(res.data.data);
@@ -38,7 +38,7 @@ const Lead = () => {
 
   const getEnqData = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API}/api/getenquiries`)
+      .get(`${process.env.REACT_APP_API}/api/getleads`)
       .then((response) => {
         if (response.status === 200) {
           setLoading(false);
@@ -75,7 +75,7 @@ const Lead = () => {
   const onEnqDelete = async (id) => {
     try {
       const res = await axios.delete(
-        `${process.env.REACT_APP_API}/api/deleteenquiry/${id}`
+        `${process.env.REACT_APP_API}/api/deletelead/${id}`
       );
       if (res && res.data.success) {
         getEnqData();

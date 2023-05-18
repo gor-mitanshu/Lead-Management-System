@@ -105,7 +105,7 @@ const AddLead = () => {
         assign: lead.assign,
       };
       const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/addenquiry`,
+        `${process.env.REACT_APP_API}/api/addlead`,
         body
       );
       if (res && res.data.success) {

@@ -13,7 +13,7 @@ const jwt = require('jsonwebtoken');
 const generatePassword = require('@wcj/generate-password');
 
 const User = require('./models/UserSchema');
-const Enquiry = require('./models/EnquirySchema');
+const Lead = require('./models/LeadSchema');
 
 mongoose.connect(process.env.MONGO_URL).then(e => {
     console.log("Connection Established".bgGreen.white)
@@ -345,12 +345,12 @@ app.put("/api/editemployee/:id", async (req, res) => {
     }
 })
 
-// ENQUIRY SECTION
-// Add Enquiry
-app.post('/api/addenquiry', async (req, res) => {
+// Lead SECTION
+// Add Lead
+app.post('/api/addlead', async (req, res) => {
     try {
         const findemployee = await User.findById({ _id: req.body.assign })
-        const enquiry = new Enquiry({
+        const lead = new Lead({
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             email: req.body.email,
@@ -361,11 +361,11 @@ app.post('/api/addenquiry', async (req, res) => {
             employeename: findemployee.firstname + " " + findemployee.lastname,
             status: "PENDING",
         })
-        await enquiry.save()
+        await lead.save()
         return res.status(200).json({
             success: true,
             message: "Lead Added Successfully",
-            data: enquiry
+            data: lead
         })
     } catch (error) {
         console.log(error)
@@ -378,14 +378,14 @@ app.post('/api/addenquiry', async (req, res) => {
 })
 
 //GET All Enquiries
-app.get('/api/getenquiries', async (req, res) => {
+app.get('/api/getleads', async (req, res) => {
     try {
-        const enquiries = await Enquiry.find()
-        if (!!enquiries) {
+        const leads = await Lead.find()
+        if (!!leads) {
             return res.status(200).send({
                 success: true,
                 message: "Success",
-                data: enquiries
+                data: leads
             })
         } else {
             return res.status(400).send({
@@ -404,15 +404,15 @@ app.get('/api/getenquiries', async (req, res) => {
 })
 
 // GET single enquiry from id
-app.get('/api/enquiry/:id', async (req, res) => {
+app.get('/api/lead/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const enquiry = await Enquiry.findById({ _id: id });
-        if (!!enquiry) {
+        const lead = await Lead.findById({ _id: id });
+        if (!!lead) {
             return res.status(200).send({
                 success: true,
                 message: "Success",
-                data: enquiry
+                data: lead
             })
         }
     } catch (error) {
@@ -425,11 +425,11 @@ app.get('/api/enquiry/:id', async (req, res) => {
     }
 })
 
-// Edit Enquiry
-app.put("/api/updateenquiry/:id", async (req, res) => {
+// Edit Lead
+app.put("/api/updatelead/:id", async (req, res) => {
     try {
         const employeeename = await User.find({ _id: req.body.assign })
-        const updateEnquiry = await Enquiry.findByIdAndUpdate(
+        const updateLead = await Lead.findByIdAndUpdate(
             { _id: req.params.id },
             {
                 $set: {
@@ -446,11 +446,11 @@ app.put("/api/updateenquiry/:id", async (req, res) => {
             },
             { new: true }
         )
-        if (!!updateEnquiry) {
+        if (!!updateLead) {
             res.status(200).send({
                 success: true,
                 message: "Lead Updated Successfully",
-                data: updateEnquiry
+                data: updateLead
             })
         } else {
             res.status(404).send({
@@ -469,16 +469,16 @@ app.put("/api/updateenquiry/:id", async (req, res) => {
 })
 
 //view
-app.get('/getenquirydetails/:id', async (req, res) => {
+app.get('/getlead-details/:id', async (req, res) => {
     try {
         const { id } = req.params
-        const ViewEnquiry = await Enquiry.findById({ _id: id })
-        if (ViewEnquiry) {
+        const ViewLead = await Lead.findById({ _id: id })
+        if (ViewLead) {
 
             return res.status(200).send({
                 success: true,
                 message: "Success",
-                data: ViewEnquiry
+                data: ViewLead
             })
         } else {
             res.status(400).send({
@@ -496,80 +496,12 @@ app.get('/getenquirydetails/:id', async (req, res) => {
     }
 })
 
-// accept status Enquiry
-app.put("/api/acceptenquiry/:id", async (req, res) => {
-    try {
-        const updateEnquiry = await Enquiry.findByIdAndUpdate(
-            { _id: req.params.id },
-            {
-                $set: {
-                    status: "COMPLETED"
-                }
-            },
-            { new: true }
-        )
-        if (!!updateEnquiry) {
-            res.status(200).send({
-                success: true,
-                message: "Completed",
-                data: updateEnquiry
-            })
-        } else {
-            res.status(404).send({
-                success: false,
-                message: "Error Fetching Data",
-            })
-        }
-    } catch (error) {
-        console.log(error)
-        res.status(404).send({
-            success: false,
-            message: "Some Error Occured",
-            error
-        })
-    }
-})
-
-// Reject status Enquiry
-app.put("/api/rejectedenquiry/:id", async (req, res) => {
-    try {
-        const updateEnquiry = await Enquiry.findByIdAndUpdate(
-            { _id: req.params.id },
-            {
-                $set: {
-                    status: "REJECTED"
-                }
-            },
-            { new: true }
-        )
-        if (!!updateEnquiry) {
-            res.status(200).send({
-                success: true,
-                message: "Rejected",
-                data: updateEnquiry
-            })
-        } else {
-            res.status(404).send({
-                success: false,
-                message: "Error Fetching Data",
-            })
-        }
-    } catch (error) {
-        console.log(error)
-        res.status(404).send({
-            success: false,
-            message: "Something went wrong",
-            error
-        })
-    }
-})
-
-// Delete Enquiry
-app.delete('/api/deleteenquiry/:id', async (req, res) => {
+// Delete Lead
+app.delete('/api/deletelead/:id', async (req, res) => {
     try {
         const { id } = req.params
-        const deleteEnquiry = await Enquiry.findByIdAndDelete({ _id: id });
-        if (!!deleteEnquiry) {
+        const deleteLead = await Lead.findByIdAndDelete({ _id: id });
+        if (!!deleteLead) {
             return res.status(200).send({
                 success: true,
                 message: " Lead Deleted Successfully"
@@ -592,10 +524,10 @@ app.delete('/api/deleteenquiry/:id', async (req, res) => {
 })
 
 // Get enquiry by employee id
-app.get('/getempenq/:id', async (req, res) => {
+app.get('/getemplead/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const getempenq = await Enquiry.find({ assign: id });
+        const getempenq = await Lead.find({ assign: id });
         if (getempenq) {
             return res.status(200).send({
                 success: true, message: "Success",

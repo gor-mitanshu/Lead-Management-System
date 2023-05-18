@@ -36,7 +36,7 @@ const ViewLead = () => {
 
   const viewEnq = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API}/getenquirydetails/${id}`)
+      .get(`${process.env.REACT_APP_API}/getlead-details/${id}`)
       .then((response) => {
         if (response.status === 200) {
           setLoading(false);
@@ -98,19 +98,21 @@ const ViewLead = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <TextField
+                      readonly
                       label="Firstname"
                       placeholder="Enter Your Firstname"
-                      fullWidth
                       name="firstname"
+                      fullWidth
                       value={viewLead.firstname}
                     />
                   </Grid>
 
                   <Grid item xs={12} sm={6}>
                     <TextField
+                      readonly
                       label="Lastname"
-                      placeholder="Enter Your Lastname"
                       fullWidth
+                      placeholder="Enter Your Lastname"
                       name="lastname"
                       value={viewLead.lastname}
                     />
@@ -118,6 +120,7 @@ const ViewLead = () => {
 
                   <Grid item xs={12}>
                     <TextField
+                      readonly
                       label="Email"
                       placeholder="Enter Your Email"
                       fullWidth
@@ -128,6 +131,7 @@ const ViewLead = () => {
 
                   <Grid item xs={12}>
                     <TextField
+                      readonly
                       label="Phone Number"
                       placeholder="Enter Your Number"
                       type="number"
@@ -138,11 +142,10 @@ const ViewLead = () => {
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
+                      readonly
                       label="Company"
                       placeholder="Enter Your Company Name"
                       name="company"
-                      type="text"
-                      size="small"
                       fullWidth
                       value={viewLead.company}
                     />
@@ -152,6 +155,7 @@ const ViewLead = () => {
                     <FormControl fullWidth align="left">
                       <InputLabel id="workExp">Status</InputLabel>
                       <Select
+                        readonly
                         labelId="workExp"
                         label="Work Experience"
                         className="text-start"
@@ -169,17 +173,18 @@ const ViewLead = () => {
 
                   <Grid item xs={12}>
                     <TextField
+                      readonly
                       label="Assign"
                       placeholder="Enter Your Company Name"
                       name="assign"
                       type="text"
-                      size="small"
                       fullWidth
                       value={viewLead.employeename}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
+                      readonly
                       fullWidth
                       variant="outlined"
                       name="enquiry"

@@ -43,7 +43,7 @@ const Dashboard = () => {
 
   const getEmpLead = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API}/getempenq/${id}`)
+      .get(`${process.env.REACT_APP_API}/getemplead/${id}`)
       .then((response) => {
         setLeads(response.data.data);
         const unique = response.data.data.filter(
@@ -60,7 +60,7 @@ const Dashboard = () => {
 
   const getEnqData = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API}/api/getenquiries`)
+      .get(`${process.env.REACT_APP_API}/api/getleads`)
       .then((response) => {
         setLeads(response.data.data);
         const unique = response.data.data.filter(

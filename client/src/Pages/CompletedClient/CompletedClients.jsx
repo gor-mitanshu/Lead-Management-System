@@ -26,7 +26,7 @@ const Clients = () => {
 
   const getEmpClient = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API}/getempenq/${id}`)
+      .get(`${process.env.REACT_APP_API}/getemplead/${id}`)
       .then((res) => {
         setLoading(false);
         setClient(res.data.data.filter((e) => e.status === "COMPLETED"));
@@ -34,9 +34,7 @@ const Clients = () => {
   };
 
   const getData = async () => {
-    let response = await axios.get(
-      `${process.env.REACT_APP_API}/api/getenquiries`
-    );
+    let response = await axios.get(`${process.env.REACT_APP_API}/api/getleads`);
 
     if (response.status === 200) {
       setLoading(false);

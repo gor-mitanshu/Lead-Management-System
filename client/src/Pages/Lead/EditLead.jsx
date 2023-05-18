@@ -85,7 +85,7 @@ const EditLead = () => {
 
   const viewEnq = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API}/api/enquiry/${id}`)
+      .get(`${process.env.REACT_APP_API}/api/lead/${id}`)
       .then((response) => {
         if (response.status === 200) {
           setUpdatLead(response.data.data);
@@ -137,7 +137,7 @@ const EditLead = () => {
         status: updatLead.status,
       };
       const res = await axios.put(
-        `${process.env.REACT_APP_API}/api/updateenquiry/${id}`,
+        `${process.env.REACT_APP_API}/api/updatelead/${id}`,
         body
       );
       if (res && res.data.success) {

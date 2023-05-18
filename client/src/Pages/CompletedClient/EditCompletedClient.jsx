@@ -74,7 +74,7 @@ const EditClient = () => {
 
   const viewClient = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API}/api/enquiry/${id}`)
+      .get(`${process.env.REACT_APP_API}/api/lead/${id}`)
       .then((response) => {
         if (response.status === 200) {
           setUpdateClient(response.data.data);
@@ -119,7 +119,7 @@ const EditClient = () => {
       status: updateclient.status,
     };
     axios
-      .put(`${process.env.REACT_APP_API}/api/updateenquiry/${id}`, body)
+      .put(`${process.env.REACT_APP_API}/api/updatelead/${id}`, body)
       .then((response) => {
         if (response) {
           toast.success(response.data.message);
