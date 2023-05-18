@@ -22,8 +22,6 @@ const Dashboard = () => {
         data: [],
         backgroundColor: ["#202c70", "#f8c12b", "#dc3546", "#29a744"],
         hoverOffset: 2,
-        // borderColor: "black",
-        // borderWidth: 2,
       },
     ],
   };
@@ -36,8 +34,6 @@ const Dashboard = () => {
         data: [],
         backgroundColor: ["#202c70", "#f8c12b", "#dc3546", "#29a744"],
         hoverOffset: 2,
-        // borderColor: "black",
-        // borderWidth: 2,
       },
     ],
   };
@@ -79,23 +75,6 @@ const Dashboard = () => {
       });
   };
 
-  // const getEmpClient = async () => {
-  //   await axios
-  //     .get(`${process.env.REACT_APP_API}/getempclient/${id}`)
-  //     .then((res) => {
-  //       setClient(res.data.data);
-  //     });
-  // };
-
-  // const getClientData = async () => {
-  //   let response = await axios.get(
-  //     `${process.env.REACT_APP_API}/api/getclients`
-  //   );
-  //   if (response.status === 200) {
-  //     setClient(response.data.data);
-  //   }
-  // };
-
   const getMonthlyData = () => {
     var date = new Date();
     var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -132,8 +111,6 @@ const Dashboard = () => {
           label: "Total Last Month Leads",
           data: data,
           hoverOffset: 2,
-          // borderColor: "black",
-          // borderWidth: 2,
         },
       ],
     };
@@ -167,8 +144,6 @@ const Dashboard = () => {
           label: "Total Last Year Leads",
           data: data,
           hoverOffset: 2,
-          // borderColor: "black",
-          // borderWidth: 2,
         },
       ],
     };
@@ -182,10 +157,8 @@ const Dashboard = () => {
     setRole(data.role);
     if (role === "admin") {
       getEnqData();
-      // getClientData();
     } else if (role === "employee") {
       getEmpEnquiry();
-      // getEmpClient();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, role]);

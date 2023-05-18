@@ -60,7 +60,6 @@ const SideBar = () => {
           overflowX: "hidden",
           color: "white",
         }}
-        // className={role === "admin" ? "admin" : "employee"}
       >
         <Toolbar />
         <Divider />

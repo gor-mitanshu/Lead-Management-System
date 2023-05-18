@@ -17,7 +17,7 @@ import { Link, useParams } from "react-router-dom";
 import Loader from "../Loader";
 import "../../index.css";
 
-const ViewEnquiry = () => {
+const ViewLead = () => {
   const [viewenquiry, setViewenquiry] = useState({
     firstname: "",
     lastname: "",
@@ -211,4 +211,4 @@ const ViewEnquiry = () => {
   );
 };
 
-export default ViewEnquiry;
+export default ViewLead;

@@ -4,15 +4,11 @@ import {
   Button,
   ButtonGroup,
   FormControl,
-  // FormControl,
   Grid,
   InputLabel,
   MenuItem,
-  // InputLabel,
-  // MenuItem,
   Paper,
   Select,
-  // Select,
   TextField,
   Typography,
 } from "@mui/material";
@@ -24,7 +20,6 @@ import Loader from "../Loader";
 import "../../index.css";
 
 const EditClient = () => {
-  // const [emp, setEmp] = useState([]);
   const [status, setStatus] = useState([]);
   const [isloading, setLoading] = useState(false);
   const getEmpData = async () => {
@@ -33,7 +28,6 @@ const EditClient = () => {
       .then((response) => {
         if (response.status === 200) {
           setLoading(false);
-          // setEmp(response.data.data);
         }
       })
       .catch((error) => {

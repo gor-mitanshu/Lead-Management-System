@@ -3,12 +3,12 @@ import {
   Avatar,
   Button,
   ButtonGroup,
-  // FormControl,
+  FormControl,
   Grid,
-  // InputLabel,
-  // MenuItem,
+  InputLabel,
+  MenuItem,
   Paper,
-  // Select,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
@@ -19,8 +19,9 @@ import { toast } from "react-toastify";
 import Loader from "../Loader";
 import "../../index.css";
 
-const EditClient = () => {
-  // const [emp, setEmp] = useState([]);
+const EditLead = () => {
+  const [emp, setEmp] = useState([]);
+  const [status, setStatus] = useState([]);
   const [isloading, setLoading] = useState(false);
   const getEmpData = async () => {
     await axios
@@ -28,7 +29,7 @@ const EditClient = () => {
       .then((response) => {
         if (response.status === 200) {
           setLoading(false);
-          // setEmp(response.data.data);
+          setEmp(response.data.data);
         }
       })
       .catch((error) => {
@@ -42,6 +43,7 @@ const EditClient = () => {
   };
   useEffect(() => {
     setLoading(true);
+    setStatus(["PENDING", "REJECTED", "COMPLETED"]);
     setTimeout(() => {
       getEmpData();
     }, 650);
@@ -55,77 +57,98 @@ const EditClient = () => {
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   var regphone = /^[1-9]\d{9}$/;
 
-  const [updateclient, setUpdateClient] = useState({
+  const [role, setRole] = useState();
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("auth")).result.token;
+    const data = JSON.parse(atob(token.split(".")[1])).admin;
+    setRole(data.role);
+  }, []);
+
+  const [updatenquiry, setUpdatenquiry] = useState({
     firstname: "",
     lastname: "",
     email: "",
     phone: "",
+    company: "",
+    enquiry: "",
     assign: "",
     employeename: "",
+    status: "",
   });
-  const handleEditClient = (e) => {
+  const handleEditEnq = (e) => {
     const { name, value } = e.target;
-    setUpdateClient({
-      ...updateclient,
+    setUpdatenquiry({
+      ...updatenquiry,
       [name]: value,
     });
   };
 
-  const viewClient = async () => {
+  const viewEnq = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API}/api/geteditclient/${id}`)
+      .get(`${process.env.REACT_APP_API}/api/enquiry/${id}`)
       .then((response) => {
         if (response.status === 200) {
-          setUpdateClient(response.data.data);
+          setUpdatenquiry(response.data.data);
         } else {
           toast.error(response.data.message);
         }
       });
   };
   useEffect(() => {
-    viewClient();
+    viewEnq();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const EditClient = async (e) => {
+  const EditEnq = async (e) => {
     e.preventDefault();
-    if (!regfirstname.test(updateclient.firstname)) {
+    if (!regfirstname.test(updatenquiry.firstname)) {
       toast.error("Please Enter the Valid Firstname");
       return;
     }
-    if (!reglastname.test(updateclient.lastname)) {
+    if (!reglastname.test(updatenquiry.lastname)) {
       toast.error("Please Enter the Valid Lastname");
       return;
     }
-    if (!regemail.test(updateclient.email)) {
+    if (!regemail.test(updatenquiry.email)) {
       toast.error("Please Enter the Valid Email");
       return;
     }
-    if (!regphone.test(updateclient.phone)) {
+    if (!regphone.test(updatenquiry.phone)) {
       toast.error("Please Enter the Valid Phone Number");
       return;
     }
-    if (!updateclient.assign) {
+    if (!updatenquiry.enquiry) {
+      toast.error("Please send us a Lead");
+      return;
+    }
+    if (!updatenquiry.assign) {
       toast.error("Please Assign any Employee");
       return;
     }
-    const body = {
-      firstname: updateclient.firstname,
-      lastname: updateclient.lastname,
-      email: updateclient.email,
-      phone: updateclient.phone,
-      assign: updateclient.assign,
-    };
-    axios
-      .put(`${process.env.REACT_APP_API}/api/updateclient/${id}`, body)
-      .then((response) => {
-        if (response) {
-          toast.success(response.data.message);
-          navigate("/clients");
-        } else {
-          toast.error(response.data.message);
-        }
-      });
+    try {
+      const body = {
+        firstname: updatenquiry.firstname,
+        lastname: updatenquiry.lastname,
+        email: updatenquiry.email,
+        phone: updatenquiry.phone,
+        company: updatenquiry.company,
+        enquiry: updatenquiry.enquiry,
+        assign: updatenquiry.assign,
+        status: updatenquiry.status,
+      };
+      const res = await axios.put(
+        `${process.env.REACT_APP_API}/api/updateenquiry/${id}`,
+        body
+      );
+      if (res && res.data.success) {
+        toast.success(res.data.message);
+        navigate("/enquiry");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
   return (
     <>
@@ -145,7 +168,6 @@ const EditClient = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    marginBottom: "10px",
                   }}
                 >
                   <Avatar sx={{ background: "#202c70", marginRight: "10px" }}>
@@ -154,70 +176,113 @@ const EditClient = () => {
                   <Typography
                     variant="h4"
                     className="font"
-                    fontWeight="bolder"
                     align="center"
-                    color="202c70"
+                    fontWeight="bolder"
+                    color="#202c70"
                   >
-                    Update Client
+                    Update Lead
                   </Typography>
                 </Grid>
                 <form autoComplete="on">
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                       <TextField
+                        disabled={role === "admin" ? false : true}
                         label="Firstname"
                         placeholder="Enter Your Firstname"
                         fullWidth
                         name="firstname"
-                        value={updateclient.firstname}
-                        onChange={handleEditClient}
+                        value={updatenquiry.firstname}
+                        onChange={handleEditEnq}
                       />
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
                       <TextField
+                        disabled={role === "admin" ? false : true}
                         label="Lastname"
                         placeholder="Enter Your Lastname"
                         fullWidth
                         name="lastname"
-                        value={updateclient.lastname}
-                        onChange={handleEditClient}
+                        value={updatenquiry.lastname}
+                        onChange={handleEditEnq}
                       />
                     </Grid>
 
                     <Grid item xs={12}>
                       <TextField
+                        disabled={role === "admin" ? false : true}
                         label="Email"
                         placeholder="Enter Your Email"
                         fullWidth
                         name="email"
-                        value={updateclient.email}
-                        onChange={handleEditClient}
+                        value={updatenquiry.email}
+                        onChange={handleEditEnq}
                       />
                     </Grid>
 
                     <Grid item xs={12}>
                       <TextField
+                        disabled={role === "admin" ? false : true}
                         label="Phone Number"
                         placeholder="Enter Your Number"
                         type="number"
                         fullWidth
                         name="phone"
-                        value={updateclient.phone}
-                        onChange={handleEditClient}
+                        value={updatenquiry.phone}
+                        onChange={handleEditEnq}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        disabled={role === "admin" ? false : true}
+                        label="Company"
+                        placeholder="Enter Your Company Name"
+                        name="company"
+                        type="text"
+                        size="small"
+                        fullWidth
+                        value={updatenquiry.company}
+                        onChange={handleEditEnq}
                       />
                     </Grid>
 
-                    {/* <Grid item xs={12}>
+                    <Grid item xs={12}>
                       <FormControl fullWidth align="left">
-                        <InputLabel id="workExp">Work Assign To</InputLabel>
+                        <InputLabel id="workExp">Status</InputLabel>
                         <Select
                           labelId="workExp"
                           label="Work Experience"
                           className="text-start"
+                          name="status"
+                          value={updatenquiry.status}
+                          onChange={handleEditEnq}
+                        >
+                          {status.map((row, index) => (
+                            <MenuItem value={row} key={index}>
+                              {row}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <FormControl fullWidth align="left">
+                        <InputLabel
+                          id="workExp"
+                          disabled={role === "admin" ? false : true}
+                        >
+                          Work Assign To
+                        </InputLabel>
+                        <Select
+                          disabled={role === "admin" ? false : true}
+                          labelId="workExp"
+                          label="Work Experience"
+                          className="text-start"
                           name="assign"
-                          value={updateclient.assign}
-                          onChange={handleEditClient}
+                          value={updatenquiry.assign}
+                          onChange={handleEditEnq}
                         >
                           {emp.map((row, index) => (
                             <MenuItem value={row._id} key={index}>
@@ -226,19 +291,34 @@ const EditClient = () => {
                           ))}
                         </Select>
                       </FormControl>
-                    </Grid> */}
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <TextField
+                        disabled={role === "admin" ? false : true}
+                        fullWidth
+                        variant="outlined"
+                        name="enquiry"
+                        placeholder="Details"
+                        label="Comments"
+                        multiline
+                        rows={4}
+                        value={updatenquiry.enquiry}
+                        onChange={handleEditEnq}
+                      />
+                    </Grid>
                   </Grid>
                   <ButtonGroup
                     sx={{
                       margin: "25px 0 0 0",
                     }}
                   >
-                    <Link to="/clients" className="btn-link">
+                    <Link to="/enquiry" className="btn-link">
                       <Button variant="contained" sx={{ marginRight: "10px" }}>
                         Cancel
                       </Button>
                     </Link>
-                    <Button variant="contained" onClick={EditClient}>
+                    <Button variant="contained" onClick={EditEnq}>
                       Update
                     </Button>
                   </ButtonGroup>
@@ -252,4 +332,4 @@ const EditClient = () => {
   );
 };
 
-export default EditClient;
+export default EditLead;

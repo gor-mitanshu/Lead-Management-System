@@ -1,6 +1,7 @@
-import { Delete, Edit, PersonAddAlt } from "@mui/icons-material";
+import { Delete, Edit, PersonAddAlt, Visibility } from "@mui/icons-material";
 import {
   Button,
+  Chip,
   Grid,
   IconButton,
   Paper,
@@ -17,56 +18,67 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "../../index.css";
 
-const Clients = () => {
+const Lead = () => {
   const [id, setId] = useState();
   const [role, setRole] = useState();
-  const [client, setClient] = useState([]);
+  const [enq, setEnq] = useState([]);
   const [isloading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const getEmpClient = async () => {
+  const getEmpEnquiry = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API}/getempclient/${id}`)
+      .get(`${process.env.REACT_APP_API}/getempenq/${id}`)
       .then((res) => {
         setLoading(false);
-        setClient(res.data.data);
+        setEnq(res.data.data);
       });
   };
 
-  const getData = async () => {
-    let response = await axios.get(
-      `${process.env.REACT_APP_API}/api/getclients`
-    );
-    if (response.status === 200) {
-      setLoading(false);
-      setClient(response.data.data);
-    }
+  const getEnqData = async () => {
+    await axios
+      .get(`${process.env.REACT_APP_API}/api/getenquiries`)
+      .then((response) => {
+        if (response.status === 200) {
+          setLoading(false);
+          setEnq(response.data.data);
+        }
+      })
+      .catch((error) => {
+        if (error?.response.status === 400) {
+          return <h1>Data Not Found</h1>;
+        }
+        if (error?.response.status === 404) {
+          console.log(error.response.data.message);
+        }
+      });
   };
   useEffect(() => {
-    setLoading(true);
     const token = JSON.parse(localStorage.getItem("auth")).result.token;
     const data = JSON.parse(atob(token.split(".")[1])).admin;
     const id = data._id;
     setId(id);
     setRole(data.role);
+    setLoading(true);
     setTimeout(() => {
       if (role === "admin") {
-        getData();
+        getEnqData();
       } else if (role === "employee") {
-        getEmpClient();
+        getEmpEnquiry();
       }
     }, 650);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, role]);
 
-  const onDelete = async (id) => {
+  const onEnqDelete = async (id) => {
     try {
       const res = await axios.delete(
-        `${process.env.REACT_APP_API}/api/deleteclient/${id}`
+        `${process.env.REACT_APP_API}/api/deleteenquiry/${id}`
       );
       if (res && res.data.success) {
-        getData();
+        getEnqData();
         toast.success(res.data.message);
       } else {
         toast.error(res.data.message);
@@ -75,6 +87,7 @@ const Clients = () => {
       toast.error(error.response.data.message);
     }
   };
+
   return (
     <>
       {isloading ? (
@@ -99,18 +112,17 @@ const Clients = () => {
               variant="h3"
               paddingBottom={3}
             >
-              Clients
+              Leads
             </Typography>
-
             {role === "admin" ? (
               <>
                 <Link
-                  to="/addclient"
+                  to="/addenquiry"
                   className="btn-link"
                   style={{ marginBottom: "24px" }}
                 >
                   <Button variant="contained" color="primary">
-                    <PersonAddAlt sx={{ paddingRight: "5px" }} /> Add Client
+                    <PersonAddAlt sx={{ paddingRight: "5px" }} /> Add Lead
                   </Button>
                 </Link>
               </>
@@ -118,9 +130,9 @@ const Clients = () => {
           </Grid>
 
           <Grid item lg={12} sm={12} xs={11}>
-            {client.length <= 0 ? (
+            {enq.length <= 0 ? (
               <div style={{ textAlign: "center", color: "red" }}>
-                <h1>* NO CLIENT DATA FOUND...</h1>
+                <h1>* NO Lead DATA FOUND...</h1>
               </div>
             ) : (
               <TableContainer
@@ -135,6 +147,7 @@ const Clients = () => {
                           background: "black",
                           color: "white",
                           textAlign: "center",
+                          width: "50px",
                         }}
                       >
                         Id
@@ -148,7 +161,6 @@ const Clients = () => {
                       >
                         Name
                       </TableCell>
-
                       <TableCell
                         sx={{
                           background: "black",
@@ -167,36 +179,43 @@ const Clients = () => {
                       >
                         Phone
                       </TableCell>
-
                       {role === "admin" ? (
-                        <>
-                          {/* <TableCell
-                            sx={{
-                              background: "black",
-                              color: "white",
-                              textAlign: "center",
-                            }}
-                          >
-                            Assign to
-                          </TableCell> */}
-                          <TableCell
-                            sx={{
-                              background: "black",
-                              color: "white",
-                              textAlign: "center",
-                            }}
-                          >
-                            Actions
-                          </TableCell>
-                        </>
+                        <TableCell
+                          sx={{
+                            background: "black",
+                            color: "white",
+                            textAlign: "center",
+                          }}
+                        >
+                          Assign to
+                        </TableCell>
                       ) : null}
+                      <TableCell
+                        sx={{
+                          background: "black",
+                          color: "white",
+                          textAlign: "center",
+                        }}
+                      >
+                        Status
+                      </TableCell>
+
+                      <TableCell
+                        sx={{
+                          background: "black",
+                          color: "white",
+                          textAlign: "center",
+                        }}
+                      >
+                        Actions
+                      </TableCell>
                     </TableRow>
                   </TableHead>
 
                   <TableBody>
-                    {client.map((row, key) => (
+                    {enq.map((row, key) => (
                       <TableRow key={key}>
-                        <TableCell sx={{ textAlign: "center" }}>
+                        <TableCell sx={{ textAlign: "center", width: "50px" }}>
                           {key + 1}
                         </TableCell>
                         <TableCell sx={{ textAlign: "center" }}>
@@ -208,21 +227,49 @@ const Clients = () => {
                         <TableCell sx={{ textAlign: "center" }}>
                           {row.phone}
                         </TableCell>
+                        {role === "admin" ? (
+                          <TableCell sx={{ textAlign: "center" }}>
+                            {row.employeename}
+                          </TableCell>
+                        ) : null}
+                        <TableCell sx={{ textAlign: "center" }}>
+                          <Chip
+                            label={row.status}
+                            sx={{ width: "120px" }}
+                            className={
+                              row.status === "PENDING"
+                                ? "pending"
+                                : row.status === "COMPLETED"
+                                ? "accepted"
+                                : row.status === "REJECTED"
+                                ? "rejected"
+                                : ""
+                            }
+                            variant="contained"
+                            size="medium"
+                          />
+                        </TableCell>
 
                         {role === "admin" ? (
                           <>
-                            {/* <TableCell sx={{ textAlign: "center" }}>
-                              {row.employeename}
-                            </TableCell> */}
                             <TableCell
                               align="center"
                               sx={{ display: "flex", justifyContent: "center" }}
                             >
                               <IconButton
                                 aria-label="edit"
+                                color="inherit"
+                                onClick={() =>
+                                  navigate(`/viewenquiry/${row._id}`)
+                                }
+                              >
+                                <Visibility />
+                              </IconButton>
+                              <IconButton
+                                aria-label="edit"
                                 color="info"
                                 onClick={() =>
-                                  navigate(`/editclient/${row._id}`)
+                                  navigate(`/editenquiry/${row._id}`)
                                 }
                               >
                                 <Edit />
@@ -230,13 +277,40 @@ const Clients = () => {
                               <IconButton
                                 aria-label="delete"
                                 color="error"
-                                onClick={() => onDelete(row._id)}
+                                onClick={() => onEnqDelete(row._id)}
                               >
                                 <Delete />
                               </IconButton>
                             </TableCell>
                           </>
-                        ) : null}
+                        ) : (
+                          <>
+                            <TableCell
+                              align="center"
+                              sx={{ display: "flex", justifyContent: "center" }}
+                              className="d-flex"
+                            >
+                              <IconButton
+                                aria-label="edit"
+                                color="inherit"
+                                onClick={() =>
+                                  navigate(`/viewenquiry/${row._id}`)
+                                }
+                              >
+                                <Visibility />
+                              </IconButton>
+                              <IconButton
+                                aria-label="edit"
+                                color="info"
+                                onClick={() =>
+                                  navigate(`/editenquiry/${row._id}`)
+                                }
+                              >
+                                <Edit />
+                              </IconButton>
+                            </TableCell>
+                          </>
+                        )}
                       </TableRow>
                     ))}
                   </TableBody>
@@ -250,4 +324,4 @@ const Clients = () => {
   );
 };
 
-export default Clients;
+export default Lead;
