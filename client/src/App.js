@@ -23,10 +23,10 @@ import Employee from './Pages/Employee/Employee';
 import AddEmployee from './Pages/Employee/AddEmployee';
 import EditEmployee from './Pages/Employee/EditEmployee';
 
-import Lead from './Pages/Lead/Enquiry';
-import AddLead from './Pages/Lead/AddEnquiry';
-import EditLead from './Pages/Lead/EditEnquiry';
-import ViewLead from './Pages/Lead/ViewEnquiry';
+import Lead from './Pages/Lead/Lead';
+import AddLead from './Pages/Lead/AddLead';
+import EditLead from './Pages/Lead/EditLead';
+import ViewLead from './Pages/Lead/ViewLead';
 
 import ChangePassword from './Pages/ChangePassword/ChangePassword';
 
