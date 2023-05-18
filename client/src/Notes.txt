@@ -1,293 +1,176 @@
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
-import "../../index.css";
-import React, { useState } from "react";
-import { Bar } from "react-chartjs-2";
-import { Chart, registerables, CategoryScale, ArcElement } from "chart.js";
+import { Delete, Edit, PersonAddAlt } from "@mui/icons-material";
+import { Button, Grid, Typography } from "@mui/material";
 import axios from "axios";
-import { useEffect } from "react";
-Chart.register(CategoryScale);
-Chart.register(...registerables);
-Chart.register(ArcElement);
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Loader from "../Loader";
+import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 
-var TotalLastMonthleads = {
-  labels: [],
-  datasets: [
-    {
-      label: "Total Last Month Leads",
-      data: [],
-      backgroundColor: ["#202c70"],
-      hoverOffset: 2,
-      borderColor: "black",
-      borderWidth: 2,
-    },
-  ],
-};
-
-const Dashboard = () => {
-  const [id, setId] = useState();
-  const [role, setRole] = useState();
-  let [leads, setLeads] = useState([]);
-  let [client, setClient] = useState([]);
-
-  const getEmpEnquiry = async () => {
+const Employee = () => {
+  const [pageSize, setPageSize] = useState(2);
+  const navigate = useNavigate();
+  const [emp, setEmp] = useState([]);
+  const [isloading, setLoading] = useState(false);
+  const getEmpData = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API}/getempenq/${id}`)
-      .then((res) => {
-        setLeads(res.data.data);
-        TotalLastMonthleads = getLastMonthLeads(res.data.data);
-      });
-  };
-
-  const getEnqData = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API}/api/getenquiries`)
+      .get(`${process.env.REACT_APP_API}/api/getemployees`)
       .then((response) => {
-        setLeads(response.data.data);
-        TotalLastMonthleads = getLastMonthLeads(response.data.data);
+        setLoading(false);
+        if (response.status === 200) {
+          setEmp(response.data.data);
+        }
+      })
+      .catch((error) => {
+        if (error?.response.status === 400) {
+          return <h1>Data Not Found</h1>;
+        }
+        if (error?.response.status === 404) {
+          console.log("Some Error Occured");
+        }
       });
-  };
-
-  const getEmpClient = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API}/getempclient/${id}`)
-      .then((res) => {
-        setClient(res.data.data);
-      });
-  };
-
-  const getClientData = async () => {
-    let response = await axios.get(
-      `${process.env.REACT_APP_API}/api/getclients`
-    );
-    if (response.status === 200) {
-      setClient(response.data.data);
-    }
-  };
-
-  const getLastMonthLeads = (chartData, pendingData) => {
-    var date = new Date();
-    var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-    let currentDate = firstDay;
-    let dateArray = [];
-    let dataArray = [];
-    while (currentDate <= lastDay) {
-      dateArray.push(`${currentDate.getDate()}/${currentDate.getMonth()}`);
-      let lastMonthLeads = chartData.filter((e) => {
-        return new Date(e.createdAt).getDate() === currentDate.getDate();
-      }).length;
-      dataArray.push(lastMonthLeads);
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-    return {
-      labels: dateArray,
-      datasets: [
-        {
-          label: "Total Last Month Leads",
-          data: dataArray,
-          hoverOffset: 2,
-          borderColor: "black",
-          borderWidth: 2,
-        },
-      ],
-    };
-  };
-
-  const getMonthlyEnquires = (chartData) => {
-    // const createdDate = new Date();
-    const currentYear = new Date().getFullYear();
-    const monthsInCurrentYear = [];
-
-    for (let i = 1; i <= 12; i++) {
-      const month = new Date(currentYear, i, 1);
-      if (month) {
-        monthsInCurrentYear.push(i);
-      }
-    }
-    console.log(monthsInCurrentYear);
-  };
-  getMonthlyEnquires();
-
-  const getMonthlyData = () => {
-    var date = new Date();
-    var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-    return leads.filter(
-      (el) =>
-        new Date(el.createdAt) >= firstDay && new Date(el.createdAt) <= lastDay
-    ).length;
   };
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("auth")).result.token;
-    const data = JSON.parse(atob(token.split(".")[1])).admin;
-    const id = data._id;
-    setId(id);
-    setRole(data.role);
-    if (role === "admin") {
-      getEnqData();
-      getClientData();
-    } else if (role === "employee") {
-      getEmpEnquiry();
-      getEmpClient();
-    }
+    setLoading(true);
+    setTimeout(() => {
+      getEmpData();
+    }, 650);
+    localStorage.getItem("auth");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, role]);
+  }, []);
 
+  const columns = [
+    {
+      field: "_id",
+      headerName: "ID",
+      width: 90,
+      description: "ID",
+    },
+    {
+      field: "name",
+      headerName: "Name",
+      width: 200,
+      description: "Employee Name",
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      width: 200,
+      description: "Employee Email",
+    },
+    {
+      field: "phone",
+      headerName: "Phone",
+      width: 200,
+      description: "Employee Contact",
+    },
+    {
+      field: "actions",
+      type: "actions",
+      description: "Actions",
+      headerName: "Actions",
+      width: 80,
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<Delete color={"error"} />}
+          label="Delete"
+          onClick={() => onEmpDelete(params.row.empId)}
+        />,
+        <GridActionsCellItem
+          icon={<Edit color="primary" />}
+          label="Edit"
+          onClick={() => navigate(`/editemployee/${params.row.empId}`)}
+        />,
+      ],
+    },
+  ];
+
+  const rows = emp.map((row, key) => ({
+    _id: key + 1,
+    name: row.firstname + "" + row.lastname,
+    email: row.email,
+    phone: row.phone,
+    empId: row._id,
+    actions: row.actions,
+  }));
+
+  const onEmpDelete = async (id) => {
+    debugger;
+    try {
+      const res = await axios.delete(
+        `${process.env.REACT_APP_API}/api/deleteemployee/${id}`
+      );
+
+      if (res && res.data.success) {
+        getEmpData();
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.data.message);
+    }
+  };
   return (
     <>
-      <Grid container>
-        <Grid item container spacing={1} sx={{ padding: "25px 10px" }}>
-          <Grid item lg={2.4} md={6} sm={12} xs={12}>
-            <Card
-              sx={{
-                background: "#202c70",
-                color: "#fff",
-              }}
+      {isloading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <Grid container padding={2}>
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+            xs={12}
+          >
+            <Typography
+              className="font"
+              color="#202c70"
+              variant="h3"
+              paddingBottom={3}
             >
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CardContent>
-                  <Typography
-                    component="div"
-                    variant="h5"
-                    sx={{ fontSize: "2rem" }}
-                  >
-                    {getMonthlyData()}
-                  </Typography>
-                  <Typography variant="subtitle1" color="#fff" component="div">
-                    Total Month Leads
-                  </Typography>
-                </CardContent>
-              </Box>
-            </Card>
+              Employees
+            </Typography>
+            <Link
+              to="/addemployee"
+              className="btn-link"
+              style={{ marginBottom: "24px" }}
+            >
+              <Button variant="contained" color="primary">
+                <PersonAddAlt sx={{ paddingRight: "5px" }} /> Add Employee
+              </Button>
+            </Link>
           </Grid>
 
-          <Grid item lg={2.4} sm={6} xs={12}>
-            <Card
-              sx={{
-                background: "#f8c12b",
-                color: "#fff",
-              }}
-            >
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CardContent>
-                  <Typography
-                    component="div"
-                    variant="h5"
-                    sx={{ fontSize: "2rem" }}
-                  >
-                    {leads.filter((e) => e.status === "PENDING").length}
-                  </Typography>
-                  <Typography variant="subtitle1" color="#fff" component="div">
-                    Pending Leads
-                  </Typography>
-                </CardContent>
-              </Box>
-            </Card>
-          </Grid>
-
-          <Grid item lg={2.4} sm={6} xs={12}>
-            <Card
-              sx={{
-                background: "#dc3546",
-                color: "#fff",
-              }}
-            >
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CardContent>
-                  <Typography
-                    component="div"
-                    variant="h5"
-                    sx={{ fontSize: "2rem" }}
-                  >
-                    {leads.filter((e) => e.status === "REJECTED").length}
-                  </Typography>
-                  <Typography variant="subtitle1" color="#fff" component="div">
-                    Rejected Leads
-                  </Typography>
-                </CardContent>
-              </Box>
-            </Card>
-          </Grid>
-
-          <Grid item lg={2.4} sm={6} xs={12}>
-            <Card
-              sx={{
-                background: "#29a744",
-                color: "#fff",
-              }}
-            >
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CardContent>
-                  <Typography
-                    component="div"
-                    variant="h5"
-                    sx={{ fontSize: "2rem" }}
-                  >
-                    {leads.filter((e) => e.status === "COMPLETED").length}
-                  </Typography>
-                  <Typography variant="subtitle1" color="#fff" component="div">
-                    Completed Leads
-                  </Typography>
-                </CardContent>
-              </Box>
-            </Card>
-          </Grid>
-
-          <Grid item lg={2.4} sm={6} xs={12}>
-            <Card
-              sx={{
-                background: "#f88961",
-                color: "#fff",
-              }}
-            >
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CardContent>
-                  <Typography
-                    component="div"
-                    variant="h5"
-                    sx={{ fontSize: "2rem" }}
-                  >
-                    {client.filter((e) => e.role === "client").length}
-                  </Typography>
-                  <Typography variant="subtitle1" color="#fff" component="div">
-                    Total Clients
-                  </Typography>
-                </CardContent>
-              </Box>
-            </Card>
+          <Grid item lg={12} sm={12} xs={11}>
+            {emp.length <= 0 ? (
+              <div style={{ textAlign: "center", color: "red" }}>
+                <h1>* NO EMPLOYEE DATA FOUND ...</h1>
+              </div>
+            ) : (
+              <DataGrid
+                // sx={{ m: 2 }}
+                rows={rows}
+                columns={columns}
+                rowsPerPageOptions={[5, 10, 15]}
+                pageSize={pageSize}
+                onPageSizeChange={(newPage) => setPageSize(newPage)}
+                // checkboxSelection
+                disableRowSelectionOnClick
+                getRowId={(row) => row._id}
+              />
+            )}
           </Grid>
         </Grid>
-
-        <Grid item lg={12} container spacing={2} sx={{ padding: "20px 10px" }}>
-          <Grid item lg={6} xs={12}>
-            <Card
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Bar data={TotalLastMonthleads} />
-            </Card>
-            <Typography>Monthly Enquires: </Typography>
-          </Grid>
-
-          <Grid item lg={6} xs={12}>
-            <Card
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Bar data={TotalLastMonthleads} />
-            </Card>
-            <Typography>Yearly Enquires: </Typography>
-          </Grid>
-        </Grid>
-      </Grid>
+      )}
     </>
   );
 };
 
-export default Dashboard;
+export default Employee;
