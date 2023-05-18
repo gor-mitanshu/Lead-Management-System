@@ -27,7 +27,7 @@ const Lead = () => {
   const [isloading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const getEmpEnquiry = async () => {
+  const getEmpLead = async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/getempenq/${id}`)
       .then((res) => {
@@ -65,7 +65,7 @@ const Lead = () => {
       if (role === "admin") {
         getEnqData();
       } else if (role === "employee") {
-        getEmpEnquiry();
+        getEmpLead();
       }
     }, 650);
 
@@ -117,7 +117,7 @@ const Lead = () => {
             {role === "admin" ? (
               <>
                 <Link
-                  to="/addenquiry"
+                  to="/addlead"
                   className="btn-link"
                   style={{ marginBottom: "24px" }}
                 >
@@ -259,18 +259,14 @@ const Lead = () => {
                               <IconButton
                                 aria-label="edit"
                                 color="inherit"
-                                onClick={() =>
-                                  navigate(`/viewenquiry/${row._id}`)
-                                }
+                                onClick={() => navigate(`/viewlead/${row._id}`)}
                               >
                                 <Visibility />
                               </IconButton>
                               <IconButton
                                 aria-label="edit"
                                 color="info"
-                                onClick={() =>
-                                  navigate(`/editenquiry/${row._id}`)
-                                }
+                                onClick={() => navigate(`/editlead/${row._id}`)}
                               >
                                 <Edit />
                               </IconButton>
@@ -293,18 +289,14 @@ const Lead = () => {
                               <IconButton
                                 aria-label="edit"
                                 color="inherit"
-                                onClick={() =>
-                                  navigate(`/viewenquiry/${row._id}`)
-                                }
+                                onClick={() => navigate(`/viewlead/${row._id}`)}
                               >
                                 <Visibility />
                               </IconButton>
                               <IconButton
                                 aria-label="edit"
                                 color="info"
-                                onClick={() =>
-                                  navigate(`/editenquiry/${row._id}`)
-                                }
+                                onClick={() => navigate(`/editlead/${row._id}`)}
                               >
                                 <Edit />
                               </IconButton>

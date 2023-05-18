@@ -64,7 +64,7 @@ const EditLead = () => {
     setRole(data.role);
   }, []);
 
-  const [updatenquiry, setUpdatenquiry] = useState({
+  const [updatLead, setUpdatLead] = useState({
     firstname: "",
     lastname: "",
     email: "",
@@ -77,8 +77,8 @@ const EditLead = () => {
   });
   const handleEditEnq = (e) => {
     const { name, value } = e.target;
-    setUpdatenquiry({
-      ...updatenquiry,
+    setUpdatLead({
+      ...updatLead,
       [name]: value,
     });
   };
@@ -88,7 +88,7 @@ const EditLead = () => {
       .get(`${process.env.REACT_APP_API}/api/enquiry/${id}`)
       .then((response) => {
         if (response.status === 200) {
-          setUpdatenquiry(response.data.data);
+          setUpdatLead(response.data.data);
         } else {
           toast.error(response.data.message);
         }
@@ -101,40 +101,40 @@ const EditLead = () => {
 
   const EditEnq = async (e) => {
     e.preventDefault();
-    if (!regfirstname.test(updatenquiry.firstname)) {
+    if (!regfirstname.test(updatLead.firstname)) {
       toast.error("Please Enter the Valid Firstname");
       return;
     }
-    if (!reglastname.test(updatenquiry.lastname)) {
+    if (!reglastname.test(updatLead.lastname)) {
       toast.error("Please Enter the Valid Lastname");
       return;
     }
-    if (!regemail.test(updatenquiry.email)) {
+    if (!regemail.test(updatLead.email)) {
       toast.error("Please Enter the Valid Email");
       return;
     }
-    if (!regphone.test(updatenquiry.phone)) {
+    if (!regphone.test(updatLead.phone)) {
       toast.error("Please Enter the Valid Phone Number");
       return;
     }
-    if (!updatenquiry.enquiry) {
+    if (!updatLead.enquiry) {
       toast.error("Please send us a Lead");
       return;
     }
-    if (!updatenquiry.assign) {
+    if (!updatLead.assign) {
       toast.error("Please Assign any Employee");
       return;
     }
     try {
       const body = {
-        firstname: updatenquiry.firstname,
-        lastname: updatenquiry.lastname,
-        email: updatenquiry.email,
-        phone: updatenquiry.phone,
-        company: updatenquiry.company,
-        enquiry: updatenquiry.enquiry,
-        assign: updatenquiry.assign,
-        status: updatenquiry.status,
+        firstname: updatLead.firstname,
+        lastname: updatLead.lastname,
+        email: updatLead.email,
+        phone: updatLead.phone,
+        company: updatLead.company,
+        enquiry: updatLead.enquiry,
+        assign: updatLead.assign,
+        status: updatLead.status,
       };
       const res = await axios.put(
         `${process.env.REACT_APP_API}/api/updateenquiry/${id}`,
@@ -142,7 +142,7 @@ const EditLead = () => {
       );
       if (res && res.data.success) {
         toast.success(res.data.message);
-        navigate("/enquiry");
+        navigate("/lead");
       } else {
         toast.error(res.data.message);
       }
@@ -192,7 +192,7 @@ const EditLead = () => {
                         placeholder="Enter Your Firstname"
                         fullWidth
                         name="firstname"
-                        value={updatenquiry.firstname}
+                        value={updatLead.firstname}
                         onChange={handleEditEnq}
                       />
                     </Grid>
@@ -204,7 +204,7 @@ const EditLead = () => {
                         placeholder="Enter Your Lastname"
                         fullWidth
                         name="lastname"
-                        value={updatenquiry.lastname}
+                        value={updatLead.lastname}
                         onChange={handleEditEnq}
                       />
                     </Grid>
@@ -216,7 +216,7 @@ const EditLead = () => {
                         placeholder="Enter Your Email"
                         fullWidth
                         name="email"
-                        value={updatenquiry.email}
+                        value={updatLead.email}
                         onChange={handleEditEnq}
                       />
                     </Grid>
@@ -229,7 +229,7 @@ const EditLead = () => {
                         type="number"
                         fullWidth
                         name="phone"
-                        value={updatenquiry.phone}
+                        value={updatLead.phone}
                         onChange={handleEditEnq}
                       />
                     </Grid>
@@ -242,7 +242,7 @@ const EditLead = () => {
                         type="text"
                         size="small"
                         fullWidth
-                        value={updatenquiry.company}
+                        value={updatLead.company}
                         onChange={handleEditEnq}
                       />
                     </Grid>
@@ -255,7 +255,7 @@ const EditLead = () => {
                           label="Work Experience"
                           className="text-start"
                           name="status"
-                          value={updatenquiry.status}
+                          value={updatLead.status}
                           onChange={handleEditEnq}
                         >
                           {status.map((row, index) => (
@@ -281,7 +281,7 @@ const EditLead = () => {
                           label="Work Experience"
                           className="text-start"
                           name="assign"
-                          value={updatenquiry.assign}
+                          value={updatLead.assign}
                           onChange={handleEditEnq}
                         >
                           {emp.map((row, index) => (
@@ -303,7 +303,7 @@ const EditLead = () => {
                         label="Comments"
                         multiline
                         rows={4}
-                        value={updatenquiry.enquiry}
+                        value={updatLead.enquiry}
                         onChange={handleEditEnq}
                       />
                     </Grid>
@@ -313,7 +313,7 @@ const EditLead = () => {
                       margin: "25px 0 0 0",
                     }}
                   >
-                    <Link to="/enquiry" className="btn-link">
+                    <Link to="/lead" className="btn-link">
                       <Button variant="contained" sx={{ marginRight: "10px" }}>
                         Cancel
                       </Button>

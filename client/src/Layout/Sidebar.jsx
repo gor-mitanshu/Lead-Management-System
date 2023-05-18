@@ -126,10 +126,7 @@ const SideBar = () => {
         ) : null}
 
         <Grid item lg={12} xs={3} sm={6}>
-          <NavLink
-            to="/enquiry"
-            style={{ textDecoration: "none", color: "#fff" }}
-          >
+          <NavLink to="/lead" style={{ textDecoration: "none", color: "#fff" }}>
             <ListItem disablePadding className="sidebar-btn">
               <ListItemButton className="activebtn" sx={{ padding: "12px" }}>
                 <ListItemIcon sx={{ color: "white" }}>

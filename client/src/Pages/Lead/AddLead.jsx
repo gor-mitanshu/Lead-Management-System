@@ -54,7 +54,7 @@ const AddLead = () => {
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   var regphone = /^[1-9]\d{9}$/;
 
-  const [enquiry, setEnquiry] = useState({
+  const [lead, setLead] = useState({
     firstname: "",
     lastname: "",
     email: "",
@@ -63,46 +63,46 @@ const AddLead = () => {
     enquiry: "",
     assign: "",
   });
-  const handleAddEnquiryChange = (e) => {
+  const handleAddLeadChange = (e) => {
     const { name, value } = e.target;
-    setEnquiry({
-      ...enquiry,
+    setLead({
+      ...lead,
       [name]: value,
     });
   };
 
-  const HandleAddEnquiry = async (e) => {
+  const HandleAddLead = async (e) => {
     e.preventDefault();
-    if (!regfirstname.test(enquiry.firstname)) {
+    if (!regfirstname.test(lead.firstname)) {
       toast.error("Please Enter the Valid Firstname");
       return;
     }
-    if (!reglastname.test(enquiry.lastname)) {
+    if (!reglastname.test(lead.lastname)) {
       toast.error("Please Enter the Valid Lastname");
       return;
     }
-    if (!regemail.test(enquiry.email)) {
+    if (!regemail.test(lead.email)) {
       toast.error("Please Enter the Valid Email");
       return;
     }
-    if (!regphone.test(enquiry.phone)) {
+    if (!regphone.test(lead.phone)) {
       toast.error("Please Enter the Valid Phone Number");
       return;
     }
 
-    if (!enquiry.enquiry) {
+    if (!lead.enquiry) {
       toast.error("Please send us a Designation");
       return;
     }
     try {
       const body = {
-        firstname: enquiry.firstname,
-        lastname: enquiry.lastname,
-        email: enquiry.email,
-        phone: enquiry.phone,
-        company: enquiry.company,
-        enquiry: enquiry.enquiry,
-        assign: enquiry.assign,
+        firstname: lead.firstname,
+        lastname: lead.lastname,
+        email: lead.email,
+        phone: lead.phone,
+        company: lead.company,
+        enquiry: lead.enquiry,
+        assign: lead.assign,
       };
       const res = await axios.post(
         `${process.env.REACT_APP_API}/api/addenquiry`,
@@ -110,7 +110,7 @@ const AddLead = () => {
       );
       if (res && res.data.success) {
         toast.success(res.data.message);
-        navigate("/enquiry");
+        navigate("/lead");
       } else {
         toast.error(res.data.message);
       }
@@ -175,8 +175,8 @@ const AddLead = () => {
                         label="Firstname"
                         placeholder="Enter Your Firstname"
                         fullWidth
-                        value={enquiry.firstname}
-                        onChange={handleAddEnquiryChange}
+                        value={lead.firstname}
+                        onChange={handleAddLeadChange}
                         name="firstname"
                       />
                     </Grid>
@@ -186,8 +186,8 @@ const AddLead = () => {
                         label="Lastname"
                         placeholder="Enter Your Lastname"
                         fullWidth
-                        value={enquiry.lastname}
-                        onChange={handleAddEnquiryChange}
+                        value={lead.lastname}
+                        onChange={handleAddLeadChange}
                         name="lastname"
                       />
                     </Grid>
@@ -197,8 +197,8 @@ const AddLead = () => {
                         label="Email"
                         placeholder="Enter Your Email"
                         fullWidth
-                        value={enquiry.email}
-                        onChange={handleAddEnquiryChange}
+                        value={lead.email}
+                        onChange={handleAddLeadChange}
                         name="email"
                       />
                     </Grid>
@@ -209,8 +209,8 @@ const AddLead = () => {
                         placeholder="Enter Your Number"
                         type="number"
                         fullWidth
-                        value={enquiry.phone}
-                        onChange={handleAddEnquiryChange}
+                        value={lead.phone}
+                        onChange={handleAddLeadChange}
                         name="phone"
                       />
                     </Grid>
@@ -222,8 +222,8 @@ const AddLead = () => {
                         name="company"
                         type="text"
                         fullWidth
-                        value={enquiry.company}
-                        onChange={handleAddEnquiryChange}
+                        value={lead.company}
+                        onChange={handleAddLeadChange}
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -234,8 +234,8 @@ const AddLead = () => {
                           label="Work Experience"
                           className="text-start"
                           name="assign"
-                          value={enquiry.assign}
-                          onChange={handleAddEnquiryChange}
+                          value={lead.assign}
+                          onChange={handleAddLeadChange}
                         >
                           {emp.map((row, index) => (
                             <MenuItem value={row._id} key={index}>
@@ -254,8 +254,8 @@ const AddLead = () => {
                         label="Comments"
                         multiline
                         rows={4}
-                        value={enquiry.enquiry}
-                        onChange={handleAddEnquiryChange}
+                        value={lead.enquiry}
+                        onChange={handleAddLeadChange}
                       />
                     </Grid>
                   </Grid>
@@ -265,12 +265,12 @@ const AddLead = () => {
                       margin: "25px 0 0 0",
                     }}
                   >
-                    <Link to="/enquiry" className="btn-link">
+                    <Link to="/lead" className="btn-link">
                       <Button variant="contained" sx={{ marginRight: "10px" }}>
                         Cancel
                       </Button>
                     </Link>
-                    <Button variant="contained" onClick={HandleAddEnquiry}>
+                    <Button variant="contained" onClick={HandleAddLead}>
                       Add
                     </Button>
                   </ButtonGroup>

@@ -18,7 +18,7 @@ import Loader from "../Loader";
 import "../../index.css";
 
 const ViewLead = () => {
-  const [viewenquiry, setViewenquiry] = useState({
+  const [viewLead, setViewLead] = useState({
     firstname: "",
     lastname: "",
     email: "",
@@ -40,7 +40,7 @@ const ViewLead = () => {
       .then((response) => {
         if (response.status === 200) {
           setLoading(false);
-          setViewenquiry(response.data.data);
+          setViewLead(response.data.data);
         }
       })
       .catch((error) => {
@@ -102,7 +102,7 @@ const ViewLead = () => {
                       placeholder="Enter Your Firstname"
                       fullWidth
                       name="firstname"
-                      value={viewenquiry.firstname}
+                      value={viewLead.firstname}
                     />
                   </Grid>
 
@@ -112,7 +112,7 @@ const ViewLead = () => {
                       placeholder="Enter Your Lastname"
                       fullWidth
                       name="lastname"
-                      value={viewenquiry.lastname}
+                      value={viewLead.lastname}
                     />
                   </Grid>
 
@@ -122,7 +122,7 @@ const ViewLead = () => {
                       placeholder="Enter Your Email"
                       fullWidth
                       name="email"
-                      value={viewenquiry.email}
+                      value={viewLead.email}
                     />
                   </Grid>
 
@@ -133,7 +133,7 @@ const ViewLead = () => {
                       type="number"
                       fullWidth
                       name="phone"
-                      value={viewenquiry.phone}
+                      value={viewLead.phone}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -144,7 +144,7 @@ const ViewLead = () => {
                       type="text"
                       size="small"
                       fullWidth
-                      value={viewenquiry.company}
+                      value={viewLead.company}
                     />
                   </Grid>
 
@@ -156,7 +156,7 @@ const ViewLead = () => {
                         label="Work Experience"
                         className="text-start"
                         name="status"
-                        value={viewenquiry.status}
+                        value={viewLead.status}
                       >
                         {status.map((row, index) => (
                           <MenuItem value={row} key={index}>
@@ -175,7 +175,7 @@ const ViewLead = () => {
                       type="text"
                       size="small"
                       fullWidth
-                      value={viewenquiry.employeename}
+                      value={viewLead.employeename}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -187,12 +187,12 @@ const ViewLead = () => {
                       label="Lead"
                       multiline
                       rows={3}
-                      value={viewenquiry.enquiry}
+                      value={viewLead.enquiry}
                     />
                   </Grid>
                 </Grid>
 
-                <Link to="/enquiry" className="btn-link">
+                <Link to="/lead" className="btn-link">
                   <Button
                     variant="contained"
                     sx={{

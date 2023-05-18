@@ -64,10 +64,10 @@ function App() {
             <Route path='/addemployee' element={role === "admin" ? <AddEmployee /> : <PageNotFound />} />
             <Route path='/editemployee/:id' element={role === "admin" ? <EditEmployee /> : <PageNotFound />} />
 
-            <Route path='/enquiry' element={<Lead />} />
-            <Route path='/addenquiry' element={role === "admin" ? <AddLead /> : <PageNotFound />} />
-            <Route path='/editenquiry/:id' element={<EditLead />} />
-            <Route path='/viewenquiry/:id' element={<ViewLead />} />
+            <Route path='/lead' element={<Lead />} />
+            <Route path='/addlead' element={role === "admin" ? <AddLead /> : <PageNotFound />} />
+            <Route path='/editlead/:id' element={<EditLead />} />
+            <Route path='/viewlead/:id' element={<ViewLead />} />
 
 
             <Route path='/clients' element={<Clients />} />

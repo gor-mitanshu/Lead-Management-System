@@ -41,7 +41,7 @@ const Dashboard = () => {
   let [TotalLastMonthleads, setTotalLastMonthleads] = useState(monthLeadChart);
   let [TotalLastYearleads, setTotalLastYearleads] = useState(YearleadChart);
 
-  const getEmpEnquiry = async () => {
+  const getEmpLead = async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/getempenq/${id}`)
       .then((response) => {
@@ -158,7 +158,7 @@ const Dashboard = () => {
     if (role === "admin") {
       getEnqData();
     } else if (role === "employee") {
-      getEmpEnquiry();
+      getEmpLead();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, role]);
