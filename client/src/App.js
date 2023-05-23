@@ -61,7 +61,7 @@ function App() {
             <Route path='/editprofile/:id' element={<EditProfile />} />
 
             <Route path='/employees' element={<Employee />} />
-            <Route path='/addemployee' element={role === "admin" ? <AddEmployee /> : <PageNotFound />} />
+            <Route path='/addemployee' element={role === "admin" ? <AddEmployee /> : null} />
             <Route path='/editemployee/:id' element={role === "admin" ? <EditEmployee /> : <PageNotFound />} />
 
             <Route path='/lead' element={<Lead />} />
