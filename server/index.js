@@ -21,6 +21,13 @@ mongoose.connect(process.env.MONGO_URL).then(e => {
     console.error(err)
 })
 
+// PORT
+const PORT = process.env.PORT || 8080;
+// Listen Port
+app.listen(PORT, () => {
+    console.log(`Server listening on ${PORT}`.bgWhite.white);
+})
+
 // Admin Register 
 app.post('/api/adminregister', async (req, res) => {
     try {
@@ -568,11 +575,4 @@ app.put('/api/changepassword/:id', async (req, res) => {
             error
         })
     }
-})
-
-// PORT
-const PORT = process.env.PORT || 8080;
-// Listen Port
-app.listen(PORT, () => {
-    console.log(`Server listening on ${PORT}`.bgWhite.white);
 })
