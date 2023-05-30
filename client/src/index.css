@@ -91,16 +91,8 @@ input::-webkit-inner-spin-button {
 
 .nav-bar {
   height: 68px;
-  .pending {
-    text-transform: uppercase !important;
-  }
-  .accepted {
-    text-transform: uppercase !important;
-  }
-  .rejected {
-    text-transform: uppercase !important;
-  }
 }
+
 .d-flex {
   display: flex !important;
 }
@@ -125,16 +117,19 @@ table {
   background-color: rgba(41, 167, 68, 0.8) !important;
   color: #fff !important;
   border-radius: 6px !important;
+  text-transform: uppercase !important;
 }
 .rejected {
   background-color: #dc3535cc !important;
   color: #fff !important;
   border-radius: 6px !important;
+  text-transform: uppercase !important;
 }
 .pending {
   background-color: rgb(248, 193, 43, 0.8) !important;
   color: #fff !important;
   border-radius: 6px !important;
+  text-transform: uppercase !important;
 }
 .accept {
   color: rgba(41, 167, 68, 0.8) !important;
