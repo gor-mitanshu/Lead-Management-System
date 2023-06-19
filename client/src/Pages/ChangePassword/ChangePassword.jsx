@@ -13,7 +13,6 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-
 const ChangePassword = () => {
   const id = useParams();
   var regpassword =
@@ -26,7 +25,6 @@ const ChangePassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = (event) => event.preventDefault();
-
   const handlechange = (e) => {
     const { name, value } = e.target;
     setPassword({
@@ -66,7 +64,6 @@ const ChangePassword = () => {
         });
     }
   };
-
   return (
     <>
       <Grid
@@ -119,7 +116,6 @@ const ChangePassword = () => {
                 Change Password
               </Typography>
             </Grid>
-
             <form autoComplete="on">
               <TextField
                 type={showPassword ? "text" : "password"}
@@ -143,7 +139,6 @@ const ChangePassword = () => {
                   ),
                 }}
               />
-
               <TextField
                 type={showPassword ? "text" : "password"}
                 label="Confirm Password"
@@ -166,7 +161,6 @@ const ChangePassword = () => {
                   ),
                 }}
               />
-
               <Button
                 type="submit"
                 variant="contained"
@@ -182,5 +176,4 @@ const ChangePassword = () => {
     </>
   );
 };
-
 export default ChangePassword;

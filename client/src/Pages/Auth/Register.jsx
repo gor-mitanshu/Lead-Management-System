@@ -13,7 +13,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-
 const Register = () => {
   var regfirstname = /^[a-zA-Z]{2,30}$/;
   var reglastname = /^[a-zA-Z]{2,30}$/;
@@ -22,7 +21,6 @@ const Register = () => {
   var regphone = /^[1-9]\d{9}$/;
   var regpassword =
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-
   const [user, setUser] = useState({
     firstname: "",
     lastname: "",
@@ -35,7 +33,6 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = (event) => event.preventDefault();
-
   const handlechange = (e) => {
     const { name, value } = e.target;
     setUser({
@@ -86,7 +83,6 @@ const Register = () => {
           key: user.key,
         }
       );
-      console.log(res);
       if (res && res.data.success) {
         toast.success(res.data.message);
         navigate("/login");
@@ -147,7 +143,6 @@ const Register = () => {
             <Typography variant="caption" sx={{ marginBottom: "20px" }}>
               Please fill out the form to register your account.
             </Typography>
-
             <form autoComplete="on" onSubmit={HandleAdminRegister}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -160,7 +155,6 @@ const Register = () => {
                     name="firstname"
                   />
                 </Grid>
-
                 <Grid item xs={12} sm={6}>
                   <TextField
                     label="Lastname"
@@ -171,7 +165,6 @@ const Register = () => {
                     name="lastname"
                   />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField
                     label="Email"
@@ -182,7 +175,6 @@ const Register = () => {
                     name="email"
                   />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField
                     label="Phone Number"
@@ -194,7 +186,6 @@ const Register = () => {
                     name="phone"
                   />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField
                     type={showPassword ? "text" : "password"}
@@ -218,7 +209,6 @@ const Register = () => {
                     }}
                   />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField
                     type={showPassword ? "text" : "password"}
@@ -242,7 +232,6 @@ const Register = () => {
                     }}
                   />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField
                     type="text"
@@ -255,7 +244,6 @@ const Register = () => {
                   />
                 </Grid>
               </Grid>
-
               <Button
                 type="submit"
                 variant="contained"
@@ -276,5 +264,4 @@ const Register = () => {
     </>
   );
 };
-
 export default Register;

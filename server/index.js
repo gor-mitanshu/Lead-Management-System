@@ -11,7 +11,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const generatePassword = require('@wcj/generate-password');
-
 const User = require('./models/UserSchema');
 const Lead = require('./models/LeadSchema');
 
@@ -20,14 +19,12 @@ mongoose.connect(process.env.MONGO_URL).then(e => {
 }).catch(err => {
     console.error(err)
 })
-
 // PORT
 const PORT = process.env.PORT || 8080;
 // Listen Port
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`.bgWhite.white);
 })
-
 // Admin Register 
 app.post('/api/adminregister', async (req, res) => {
     try {
@@ -63,7 +60,6 @@ app.post('/api/adminregister', async (req, res) => {
         })
     }
 })
-
 // Admin Login
 app.post('/api/login', async (req, res) => {
     try {
@@ -98,7 +94,6 @@ app.post('/api/login', async (req, res) => {
         })
     }
 })
-
 // Forget Password
 app.post('/api/forgetpassword', async (req, res) => {
     try {
@@ -124,7 +119,6 @@ app.post('/api/forgetpassword', async (req, res) => {
         })
     }
 })
-
 // PROFILE SECTION
 // Admin Profile
 app.get("/api/profile", async (req, res) => {
@@ -160,7 +154,6 @@ app.get("/api/profile", async (req, res) => {
         })
     }
 })
-
 // Edit Profile
 app.put('/api/editprofile/:id', async (req, res) => {
     try {
@@ -189,7 +182,6 @@ app.put('/api/editprofile/:id', async (req, res) => {
         })
     }
 })
-
 // EMPLOYEE SECTION 
 // Add Employee
 app.post('/api/addemployees', async (req, res) => {
@@ -234,7 +226,6 @@ app.post('/api/addemployees', async (req, res) => {
         })
     }
 })
-
 // GET ALL Employee
 app.get('/api/getemployees', async (req, res) => {
     try {
@@ -260,7 +251,6 @@ app.get('/api/getemployees', async (req, res) => {
         })
     }
 })
-
 // Delete Employee
 app.delete('/api/deleteemployee/:id', async (req, res) => {
     try {
@@ -286,7 +276,6 @@ app.delete('/api/deleteemployee/:id', async (req, res) => {
         })
     }
 })
-
 // GET employee from id
 app.get('/api/getemployee/:id', async (req, res) => {
     try {
@@ -313,7 +302,6 @@ app.get('/api/getemployee/:id', async (req, res) => {
         })
     }
 })
-
 // Edit Employee
 app.put("/api/editemployee/:id", async (req, res) => {
     try {
@@ -351,7 +339,6 @@ app.put("/api/editemployee/:id", async (req, res) => {
         })
     }
 })
-
 // Lead SECTION
 // Add Lead
 app.post('/api/addlead', async (req, res) => {
@@ -383,7 +370,6 @@ app.post('/api/addlead', async (req, res) => {
         })
     }
 })
-
 //GET All Enquiries
 app.get('/api/getleads', async (req, res) => {
     try {
@@ -409,7 +395,6 @@ app.get('/api/getleads', async (req, res) => {
         })
     }
 })
-
 // GET single enquiry from id
 app.get('/api/lead/:id', async (req, res) => {
     try {
@@ -431,7 +416,6 @@ app.get('/api/lead/:id', async (req, res) => {
         })
     }
 })
-
 // Edit Lead
 app.put("/api/updatelead/:id", async (req, res) => {
     try {
@@ -474,7 +458,6 @@ app.put("/api/updatelead/:id", async (req, res) => {
         })
     }
 })
-
 //view
 app.get('/getlead-details/:id', async (req, res) => {
     try {
@@ -502,7 +485,6 @@ app.get('/getlead-details/:id', async (req, res) => {
         })
     }
 })
-
 // Delete Lead
 app.delete('/api/deletelead/:id', async (req, res) => {
     try {
@@ -529,7 +511,6 @@ app.delete('/api/deletelead/:id', async (req, res) => {
         })
     }
 })
-
 // Get enquiry by employee id
 app.get('/getemplead/:id', async (req, res) => {
     try {
@@ -549,8 +530,6 @@ app.get('/getemplead/:id', async (req, res) => {
         })
     }
 })
-
-
 // Change Password
 app.put('/api/changepassword/:id', async (req, res) => {
     try {

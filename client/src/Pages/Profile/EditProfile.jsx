@@ -14,7 +14,6 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Loader";
 import "../../index.css";
-
 const EditProfile = () => {
   var regfirstname = /^[a-zA-Z]{2,30}$/;
   var reglastname = /^[a-zA-Z]{2,30}$/;
@@ -30,7 +29,6 @@ const EditProfile = () => {
     phone: "",
   });
   const { id } = useParams();
-
   const handleEdit = (e) => {
     const { name, value } = e.target;
     setEdit({
@@ -38,7 +36,6 @@ const EditProfile = () => {
       [name]: value,
     });
   };
-
   const getProfile = async () => {
     const accessToken = localStorage.getItem("auth");
     if (accessToken) {
@@ -61,7 +58,6 @@ const EditProfile = () => {
       getProfile();
     }, 650);
   }, []);
-
   const updateData = () => {
     if (!edit.firstname || !edit.lastname || !edit.email || !edit.phone) {
       toast.error("Please Enter all fields to Update");
@@ -95,7 +91,6 @@ const EditProfile = () => {
       toast.error("Please Enter the Valid Phone Number");
       return;
     }
-
     const body = {
       firstname: edit.firstname,
       lastname: edit.lastname,
@@ -217,5 +212,4 @@ const EditProfile = () => {
     </>
   );
 };
-
 export default EditProfile;

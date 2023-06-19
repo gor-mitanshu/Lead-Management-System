@@ -17,7 +17,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../Loader";
-
 const Employee = () => {
   const navigate = useNavigate();
   const [emp, setEmp] = useState([]);
@@ -48,13 +47,11 @@ const Employee = () => {
     localStorage.getItem("auth");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const onEmpDelete = async (id) => {
     try {
       const res = await axios.delete(
         `${process.env.REACT_APP_API}/api/deleteemployee/${id}`
       );
-
       if (res && res.data.success) {
         getEmpData();
         toast.success(res.data.message);
@@ -101,7 +98,6 @@ const Employee = () => {
               </Button>
             </Link>
           </Grid>
-
           <Grid item lg={12} sm={12} xs={11}>
             {emp.length <= 0 ? (
               <div style={{ textAlign: "center", color: "red" }}>
@@ -151,7 +147,6 @@ const Employee = () => {
                       >
                         Phone
                       </TableCell>
-
                       <TableCell
                         sx={{
                           background: "black",
@@ -163,7 +158,6 @@ const Employee = () => {
                       </TableCell>
                     </TableRow>
                   </TableHead>
-
                   <TableBody>
                     {emp.map((row, key) => (
                       <TableRow key={key}>
@@ -179,7 +173,6 @@ const Employee = () => {
                         <TableCell sx={{ textAlign: "center" }}>
                           {row.phone}
                         </TableCell>
-
                         <TableCell
                           align="center"
                           sx={{ display: "flex", justifyContent: "center" }}
@@ -211,5 +204,4 @@ const Employee = () => {
     </>
   );
 };
-
 export default Employee;

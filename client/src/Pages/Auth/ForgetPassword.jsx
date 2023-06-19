@@ -15,7 +15,6 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-
 const ForgetPassword = () => {
   const [user, setUser] = useState({
     email: "",
@@ -25,7 +24,6 @@ const ForgetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = (event) => event.preventDefault();
-
   const handlechange = (e) => {
     const { name, value } = e.target;
     setUser({
@@ -33,7 +31,6 @@ const ForgetPassword = () => {
       [name]: value,
     });
   };
-
   const navigate = useNavigate();
   const HandleForgetPass = async (e) => {
     e.preventDefault();
@@ -111,7 +108,6 @@ const ForgetPassword = () => {
                 Forget Password
               </Typography>
             </Grid>
-
             <form autoComplete="on" onSubmit={HandleForgetPass}>
               <Grid xs={12}>
                 <TextField
@@ -127,7 +123,6 @@ const ForgetPassword = () => {
                   autoFocus
                 />
               </Grid>
-
               <Grid item xs={12}>
                 <TextField
                   margin="dense"
@@ -166,7 +161,6 @@ const ForgetPassword = () => {
                   }}
                 />
               </Grid>
-
               <ButtonGroup
                 sx={{
                   margin: "25px 0 0 0",
@@ -188,5 +182,4 @@ const ForgetPassword = () => {
     </>
   );
 };
-
 export default ForgetPassword;

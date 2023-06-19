@@ -19,7 +19,6 @@ code {
   text-decoration: none !important;
 }
 /* Input Number None*/
-/* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -35,7 +34,6 @@ input::-webkit-inner-spin-button {
 }
 .active .activebtn {
   text-decoration: none;
-  /* color: #fff; */
   background-image: linear-gradient(to right, #e8f0ff25, #202c70);
 }
 .active:active,
@@ -44,7 +42,6 @@ input::-webkit-inner-spin-button {
   color: #fff;
   font-weight: 800;
 }
-
 .logout:hover {
   background-color: #f37d75;
   color: #fff;
@@ -58,7 +55,6 @@ input::-webkit-inner-spin-button {
   transition: 0.5s;
   transition-timing-function: ease;
 }
-
 .sidebar-sm {
   max-width: 48px;
   min-width: 48px;
@@ -71,7 +67,6 @@ input::-webkit-inner-spin-button {
     max-width: 48px !important;
     min-width: 48px !important;
   }
-
   .toggle-btn {
     display: none !important;
   }
@@ -88,31 +83,12 @@ input::-webkit-inner-spin-button {
   box-shadow: #32325d05 0 2px 5px -1px, #0000000d 0 1px 3px -1px;
   font-size: 16px;
 }
-
 .nav-bar {
   height: 68px;
 }
-
 .d-flex {
   display: flex !important;
 }
-/* tbody {
-  display: block !important;
-  max-height: calc(100vh - 64px - 74px - 108px) !important;
-  overflow: auto !important;
-}
-thead,
-tbody tr {
-  display: table !important;
-  width: 100% !important;
-  table-layout: fixed !important;
-}
-thead {
-  width: 100% !important; 
-}
-table {
-  width: 100% !important;
-} */
 .accepted {
   background-color: rgba(41, 167, 68, 0.8) !important;
   color: #fff !important;

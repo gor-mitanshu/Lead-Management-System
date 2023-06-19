@@ -18,7 +18,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../Loader";
 import "../../index.css";
-
 const AddLead = () => {
   const [emp, setEmp] = useState([]);
   const [isloading, setLoading] = useState(false);
@@ -46,14 +45,12 @@ const AddLead = () => {
       getEmpData();
     }, 650);
   }, []);
-
   const navigate = useNavigate();
   var regfirstname = /^[a-zA-Z ]{2,30}$/;
   var reglastname = /^[a-zA-Z ]{2,30}$/;
   var regemail =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   var regphone = /^[1-9]\d{9}$/;
-
   const [lead, setLead] = useState({
     firstname: "",
     lastname: "",
@@ -70,7 +67,6 @@ const AddLead = () => {
       [name]: value,
     });
   };
-
   const HandleAddLead = async (e) => {
     e.preventDefault();
     if (!regfirstname.test(lead.firstname)) {
@@ -89,7 +85,6 @@ const AddLead = () => {
       toast.error("Please Enter the Valid Phone Number");
       return;
     }
-
     if (!lead.enquiry) {
       toast.error("Please send us a Designation");
       return;
@@ -191,7 +186,6 @@ const AddLead = () => {
                         name="lastname"
                       />
                     </Grid>
-
                     <Grid item xs={12}>
                       <TextField
                         label="Email"
@@ -202,7 +196,6 @@ const AddLead = () => {
                         name="email"
                       />
                     </Grid>
-
                     <Grid item xs={12}>
                       <TextField
                         label="Phone Number"
@@ -214,7 +207,6 @@ const AddLead = () => {
                         name="phone"
                       />
                     </Grid>
-
                     <Grid item xs={12}>
                       <TextField
                         label="Company"
@@ -259,7 +251,6 @@ const AddLead = () => {
                       />
                     </Grid>
                   </Grid>
-
                   <ButtonGroup
                     sx={{
                       margin: "25px 0 0 0",
@@ -283,5 +274,4 @@ const AddLead = () => {
     </>
   );
 };
-
 export default AddLead;

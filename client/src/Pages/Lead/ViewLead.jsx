@@ -16,7 +16,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loader from "../Loader";
 import "../../index.css";
-
 const ViewLead = () => {
   const [viewLead, setViewLead] = useState({
     firstname: "",
@@ -29,11 +28,9 @@ const ViewLead = () => {
     employeename: "",
     status: "",
   });
-
   const [status, setStatus] = useState([]);
   const [isloading, setLoading] = useState(false);
   const { id } = useParams("");
-
   const viewEnq = async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/getlead-details/${id}`)
@@ -52,7 +49,6 @@ const ViewLead = () => {
         }
       });
   };
-
   useEffect(() => {
     setStatus(["PENDING", "REJECTED", "COMPLETED"]);
     setLoading(true);
@@ -94,7 +90,6 @@ const ViewLead = () => {
                     View Lead
                   </Typography>
                 </Grid>
-
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <TextField
@@ -106,7 +101,6 @@ const ViewLead = () => {
                       value={viewLead.firstname}
                     />
                   </Grid>
-
                   <Grid item xs={12} sm={6}>
                     <TextField
                       readonly
@@ -117,7 +111,6 @@ const ViewLead = () => {
                       value={viewLead.lastname}
                     />
                   </Grid>
-
                   <Grid item xs={12}>
                     <TextField
                       readonly
@@ -128,7 +121,6 @@ const ViewLead = () => {
                       value={viewLead.email}
                     />
                   </Grid>
-
                   <Grid item xs={12}>
                     <TextField
                       readonly
@@ -150,7 +142,6 @@ const ViewLead = () => {
                       value={viewLead.company}
                     />
                   </Grid>
-
                   <Grid item xs={12}>
                     <FormControl fullWidth align="left">
                       <InputLabel id="workExp">Status</InputLabel>
@@ -170,7 +161,6 @@ const ViewLead = () => {
                       </Select>
                     </FormControl>
                   </Grid>
-
                   <Grid item xs={12}>
                     <TextField
                       readonly
@@ -196,7 +186,6 @@ const ViewLead = () => {
                     />
                   </Grid>
                 </Grid>
-
                 <Link to="/lead" className="btn-link">
                   <Button
                     variant="contained"
@@ -215,5 +204,4 @@ const ViewLead = () => {
     </>
   );
 };
-
 export default ViewLead;

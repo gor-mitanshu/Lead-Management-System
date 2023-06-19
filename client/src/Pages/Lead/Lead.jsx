@@ -19,14 +19,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../index.css";
-
 const Lead = () => {
   const [id, setId] = useState();
   const [role, setRole] = useState();
   const [enq, setEnq] = useState([]);
   const [isloading, setLoading] = useState(false);
   const navigate = useNavigate();
-
   const getEmpLead = async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/getemplead/${id}`)
@@ -35,7 +33,6 @@ const Lead = () => {
         setEnq(res.data.data);
       });
   };
-
   const getEnqData = async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/api/getleads`)
@@ -71,7 +68,6 @@ const Lead = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, role]);
-
   const onEnqDelete = async (id) => {
     try {
       const res = await axios.delete(
@@ -87,7 +83,6 @@ const Lead = () => {
       toast.error(error.response.data.message);
     }
   };
-
   return (
     <>
       {isloading ? (
@@ -128,7 +123,6 @@ const Lead = () => {
               </>
             ) : null}
           </Grid>
-
           <Grid item lg={12} sm={12} xs={11}>
             {enq.length <= 0 ? (
               <div style={{ textAlign: "center", color: "red" }}>
@@ -199,7 +193,6 @@ const Lead = () => {
                       >
                         Status
                       </TableCell>
-
                       <TableCell
                         sx={{
                           background: "black",
@@ -211,7 +204,6 @@ const Lead = () => {
                       </TableCell>
                     </TableRow>
                   </TableHead>
-
                   <TableBody>
                     {enq.map((row, key) => (
                       <TableRow key={key}>
@@ -249,7 +241,6 @@ const Lead = () => {
                             size="medium"
                           />
                         </TableCell>
-
                         {role === "admin" ? (
                           <>
                             <TableCell
@@ -315,5 +306,4 @@ const Lead = () => {
     </>
   );
 };
-
 export default Lead;

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-
 const Enquiry = new mongoose.Schema({
     firstname: { type: String, required: true },
     lastname: { type: String, required: true },
@@ -11,9 +10,6 @@ const Enquiry = new mongoose.Schema({
     employeename: { type: String, required: true },
     role: { type: String, default: 'enquiry' },
     status: { type: String, },
-},
-    { timestamps: true }
-)
-
+}, { timestamps: true })
 const e_model = new mongoose.model("Enquiry", Enquiry)
 module.exports = e_model

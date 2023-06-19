@@ -13,7 +13,6 @@ import "../../index.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 const Profile = () => {
   const [isloading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -95,7 +94,6 @@ const Profile = () => {
                           </TableCell>
                         </TableRow>
                       </TableHead>
-
                       <TableHead>
                         <TableRow>
                           <TableCell
@@ -121,7 +119,6 @@ const Profile = () => {
                           </TableCell>
                         </TableRow>
                       </TableHead>
-
                       <TableHead>
                         <TableRow>
                           <TableCell
@@ -146,7 +143,6 @@ const Profile = () => {
                           </TableCell>
                         </TableRow>
                       </TableHead>
-
                       <TableHead>
                         <TableRow>
                           <TableCell
@@ -172,7 +168,6 @@ const Profile = () => {
                         </TableRow>
                       </TableHead>
                     </Table>
-
                     <Button
                       variant="contained"
                       sx={{ margin: "40px 2px 0px 20px" }}
@@ -190,5 +185,4 @@ const Profile = () => {
     </>
   );
 };
-
 export default Profile;

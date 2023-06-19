@@ -1,7 +1,5 @@
 import * as React from "react";
-
 const authContext = React.createContext();
-
 function useAuth() {
   const [authed, setAuthed] = React.useState(false);
   return {
@@ -20,13 +18,10 @@ function useAuth() {
     },
   };
 }
-
 export function AuthProvider({ children }) {
   const auth = useAuth();
-
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
-
 export default function AuthConsumer() {
   return React.useContext(authContext);
 }

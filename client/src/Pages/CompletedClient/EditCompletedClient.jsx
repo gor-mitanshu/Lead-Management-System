@@ -18,7 +18,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../Loader";
 import "../../index.css";
-
 const EditClient = () => {
   const [status, setStatus] = useState([]);
   const [isloading, setLoading] = useState(false);
@@ -46,7 +45,6 @@ const EditClient = () => {
       getEmpData();
     }, 650);
   }, []);
-
   const navigate = useNavigate();
   const { id } = useParams("");
   var regfirstname = /^[a-zA-Z]{2,30}$/;
@@ -54,7 +52,6 @@ const EditClient = () => {
   var regemail =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   var regphone = /^[1-9]\d{9}$/;
-
   const [updateclient, setUpdateClient] = useState({
     firstname: "",
     lastname: "",
@@ -71,7 +68,6 @@ const EditClient = () => {
       [name]: value,
     });
   };
-
   const viewClient = async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/api/lead/${id}`)
@@ -87,7 +83,6 @@ const EditClient = () => {
     viewClient();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const EditClient = async (e) => {
     e.preventDefault();
     if (!regfirstname.test(updateclient.firstname)) {
@@ -175,7 +170,6 @@ const EditClient = () => {
                         onChange={handleEditClient}
                       />
                     </Grid>
-
                     <Grid item xs={12} sm={6}>
                       <TextField
                         label="Lastname"
@@ -186,7 +180,6 @@ const EditClient = () => {
                         onChange={handleEditClient}
                       />
                     </Grid>
-
                     <Grid item xs={12}>
                       <TextField
                         label="Email"
@@ -197,7 +190,6 @@ const EditClient = () => {
                         onChange={handleEditClient}
                       />
                     </Grid>
-
                     <Grid item xs={12}>
                       <TextField
                         label="Phone Number"
@@ -209,7 +201,6 @@ const EditClient = () => {
                         onChange={handleEditClient}
                       />
                     </Grid>
-
                     <Grid item xs={12}>
                       <TextField
                         label="Company"
@@ -221,7 +212,6 @@ const EditClient = () => {
                         onChange={handleEditClient}
                       />
                     </Grid>
-
                     <Grid item xs={12}>
                       <FormControl fullWidth align="left">
                         <InputLabel id="workExp">Status</InputLabel>
@@ -241,26 +231,6 @@ const EditClient = () => {
                         </Select>
                       </FormControl>
                     </Grid>
-
-                    {/* <Grid item xs={12}>
-                      <FormControl fullWidth align="left">
-                        <InputLabel id="workExp">Work Assign To</InputLabel>
-                        <Select
-                          labelId="workExp"
-                          label="Work Experience"
-                          className="text-start"
-                          name="assign"
-                          value={updateclient.assign}
-                          onChange={handleEditClient}
-                        >
-                          {emp.map((row, index) => (
-                            <MenuItem value={row._id} key={index}>
-                              {row.firstname}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </Grid> */}
                   </Grid>
                   <ButtonGroup
                     sx={{
@@ -285,5 +255,4 @@ const EditClient = () => {
     </>
   );
 };
-
 export default EditClient;

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-
 const User = new mongoose.Schema({
     firstname: { type: String, required: true },
     lastname: { type: String, required: true },
@@ -8,8 +7,6 @@ const User = new mongoose.Schema({
     password: { type: String, required: true },
     key: { type: String, required: false },
     role: { type: String }
-}, { timestamps: true },
-)
-
+}, { timestamps: true })
 const model = new mongoose.model("Master-Register", User)
 module.exports = model

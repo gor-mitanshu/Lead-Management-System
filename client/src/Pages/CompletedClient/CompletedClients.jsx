@@ -16,14 +16,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
 const Clients = () => {
   const [id, setId] = useState();
   const [role, setRole] = useState();
   const [client, setClient] = useState([]);
   const [isloading, setLoading] = useState(false);
   const navigate = useNavigate();
-
   const getEmpClient = async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/getemplead/${id}`)
@@ -32,7 +30,6 @@ const Clients = () => {
         setClient(res.data.data.filter((e) => e.status === "COMPLETED"));
       });
   };
-
   const getData = async () => {
     let response = await axios.get(`${process.env.REACT_APP_API}/api/getleads`);
 
@@ -57,7 +54,6 @@ const Clients = () => {
     }, 650);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, role]);
-
   const onDelete = async (id) => {
     try {
       const res = await axios.delete(
@@ -160,18 +156,8 @@ const Clients = () => {
                       >
                         Company{" "}
                       </TableCell>
-
                       {role === "admin" ? (
                         <>
-                          {/* <TableCell
-                            sx={{
-                              background: "black",
-                              color: "white",
-                              textAlign: "center",
-                            }}
-                          >
-                            Assign to
-                          </TableCell> */}
                           <TableCell
                             sx={{
                               background: "black",
@@ -185,7 +171,6 @@ const Clients = () => {
                       ) : null}
                     </TableRow>
                   </TableHead>
-
                   <TableBody>
                     {client.map((row, key) => (
                       <TableRow key={key}>
@@ -204,12 +189,8 @@ const Clients = () => {
                         <TableCell sx={{ textAlign: "center" }}>
                           {row.company}
                         </TableCell>
-
                         {role === "admin" ? (
                           <>
-                            {/* <TableCell sx={{ textAlign: "center" }}>
-                              {row.employeename}
-                            </TableCell> */}
                             <TableCell
                               align="center"
                               sx={{ display: "flex", justifyContent: "center" }}
@@ -245,5 +226,4 @@ const Clients = () => {
     </>
   );
 };
-
 export default Clients;
